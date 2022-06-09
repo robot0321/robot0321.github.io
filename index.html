@@ -264,6 +264,10 @@
               <br>
               <p></p>
               <p>We propose a method for rapid initialization in Stereo visual-inertial odometry using relative pose constraints.</p>
+
+              <br>
+              <a href="https://github.com/robot0321/visual_inertial_odometry_simualtion">Related code (Pended)</a>
+              <p></p>
             </td>
           </tr> 
 <!--
@@ -358,7 +362,85 @@
         </tr>
       </tbody></table>
 
-      <table width="100%" align="center" border="0" cellpadding="20"><tbody> 
+      <table width="100%" align="center" border="1px solid #444444" cellpadding="20"><tbody> 
+        <tr onmouseout="ExtendiNeRF_stop()" onmouseover="ExtendiNeRF_start()">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one">
+              <div class="two" id='ExtendiNeRF_image'>
+              <img src='imgs/.jpg' height=100% width=100%>
+              <!--<video  width=100% height=100% muted autoplay loop>
+                <source src="imgs/SNUEwheel.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>-->
+              </div>
+              <img src='imgs/.jpg' height=100% width=100%>
+            </div>
+            <script type="text/javascript">
+              function ExtendiNeRF_start() {
+                document.getElementById('ExtendiNeRF_image').style.opacity = "1";
+              }
+  
+              function ExtendiNeRF_stop() {
+                document.getElementById('ExtendiNeRF_image').style.opacity = "0";
+              }
+              ExtendiNeRF_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:middle">
+            <papertitle>Extended iNeRF: pose estimation in NeRF by utilizing iNeRF optimization and SuperGlueNetwork</papertitle>
+            <br>
+            <strong>Jaeyoung Chung</strong>, Seoyeon Yang
+            <br>
+            Course project in spring 2021
+            <br>
+            poster
+            /
+            <a href="https://www.youtube.com/watch?v=Gkuvqe-rUXc">video1 (success case1)</a> / <a href="https://www.youtube.com/watch?v=ZNC_bzAnvog">video1 (success case2)</a>
+            /
+            <a href="https://www.youtube.com/watch?v=q2TjwB5kbEU">video1 (failure case1)</a> / <a href="https://www.youtube.com/watch?v=NfFkjghk7gg">video1 (failure case2)</a>
+            <p></p>
+            <p>We reproduce <a href="https://yenchenlin.me/inerf/">iNeRF</a> and improve the performance of pose estimation in NeRF by using feature matcing method such as <a href="https://github.com/magicleap/SuperGluePretrainedNetwork">SuperGlueNetwork</a>.</p>
+          </td>
+        </tr> 
+        <!---->
+        <tr onmouseout="AlphaD_stop()" onmouseover="AlphaD_start()">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one">
+              <div class="two" id='AlphaD_image'>
+              <img src='imgs/.jpg' height=100% width=100%>
+              <!--<video  width=100% height=100% muted autoplay loop>
+                <source src="imgs/SNUEwheel.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>-->
+              </div>
+              <img src='imgs/.jpg' height=100% width=100%>
+            </div>
+            <script type="text/javascript">
+              function AlphaD_start() {
+                document.getElementById('AlphaD_image').style.opacity = "1";
+              }
+  
+              function AlphaD_stop() {
+                document.getElementById('AlphaD_image').style.opacity = "0";
+              }
+              AlphaD_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:middle">
+            <papertitle>Alpha-D: Developing drone controlled by reinforcement learning</papertitle>
+            <br>
+            Yongjae Kim, <strong>Jaeyoung Chung</strong>, Taehyung Kim, Hyerin Choi, Kevin Nam
+            <br>
+            Spring ~ fall 2016
+            <br>
+            <a href="https://github.com/SIGMA-alphaD/alphaD-ROS/">code (ROS)</a>
+            /
+            <a href="https://github.com/robot0321/GPS_INS_KF">code (GPS/INS, Kalman Filter)</a>
+            <p></p>
+            <p>We develop the whole system of quadcopter drone from scratch and try to control some complex movement by utilizing reinforcement learning.</p>
+          </td>
+        </tr> 
+        <!---->
         <tr onmouseout="SNUEwheel_stop()" onmouseover="SNUEwheel_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">
             <div class="one">
@@ -389,7 +471,7 @@
             <br>
             <em>First prize in <a href="https://https://eng.snu.ac.kr/creative_award?creativity_idx=316/">Dongbu Award for SNU Creative Design Fair</a></em>, summer and fall 2015
             <br>
-            project page / video
+            Recorded video
             <!--<a href="https://myavartanoo.github.io/3dias/">project page</a>
             /
             <a href="https://www.youtube.com/watch?v=JtBS4KBcKVc">video</a>-->
@@ -397,18 +479,18 @@
             <p>We develop an electronic bicycle with an interchangeable front wheel between motor-powered wheel and normal. We design the motor control system deliberately for similar user experiences with pedal assistance system (PAS).</p>
           </td>
         </tr> 
-
+        <!---->
         <tr onmouseout="RocketHanaro_stop()" onmouseover="RocketHanaro_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">
-            <div class="one">
+            <div class="one", style="display:table-cell;vertical-align:middle">
               <div class="two" id='RocketHanaro_image'>
               <!-- <img src='imgs/RocketHanaro.jpg' height=100%, width=100%> -->
-              <video width=100% height=100% muted autoplay loop>
+              <video width=98% muted autoplay loop>
                 <source src="imgs/NURA2017_Identity.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
               </div>
-              <img src='imgs/2016nura8.jpeg' height=100% style="margin-left: auto; margin-right: auto; display: block;">
+              <img src='imgs/NURA2016.jpeg' width=100%> <!--style="margin-left: auto; margin-right: auto; display: block;">-->
             </div>
             <script type="text/javascript">
               function RocketHanaro_start() {
@@ -422,7 +504,7 @@
             </script>
           </td>
           <td style="padding:20px;width:75%;vertical-align:middle">
-            <papertitle>Sounding Rocket</papertitle>
+            <papertitle>Sounding Rocket Development</papertitle>
             <br>
             <strong>Jaeyoung Chung</strong>, Daehwan Kim, Beom Park, Soobeom Heo, Deokhyun Kim, and other Hanaro Team members
             <br>
@@ -435,32 +517,16 @@
             <a href="https://www.youtube-nocookie.com/embed/YYeq12_Y2Po?start=23&end=76&autoplay=1">2016 NURA contest</a>
             /
             <a href="https://www.youtube-nocookie.com/embed/9uu3IjO5AUo?start=706&end=902&autoplay=1">2017 NURA contest</a>
+            <br>
+            <a href="https://github.com/robot0321/MPU6050_Servo_rocket_control">code (rocket pin control)</a>
+            /
+            <a href="https://github.com/robot0321/INS_matlab">data(recorded INS data during rocket flight)</a>
             <p></p>
-            <p>We develop whole solid sounding rockets from engine, fuel, body, electric system including wing control, parachute control, ignition control, data(pressure, accel, rotation) measurement, and communication system. 
-            I was a leader of electric system team.</p>
+            <p>We develop whole solid sounding rockets from engine, fuel, body, electric system including wing control, parachute control, ignition control, data(pressure, accel, rotation) measurement, and communication system. </p>
+            <p>I was a leader of electric system team. (2016 ~ 2017)</p>
           </td>
         </tr> 
 
-      <!--
-      <tr>
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <img src="img/cs148_rt.jpg" alt="prl" width="160"></td>
-        <td width="75%" valign="center">
-        <p>
-        <p>
-          <a href="cs148_raytracing">
-          <papertitle>Ray Tracer</papertitle>
-          </a>
-          <br>
-          <em>CS148 assignment</em>, Fall 2012
-        </p>
-        <p>
-          Implemented a ray tracer with reflections, refractions, soft shadows, and depth of field.
-        </p>
-        </p>
-        </td>
-      </tr>
-    -->
       </tbody></table>
     
     
