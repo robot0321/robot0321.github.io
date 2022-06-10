@@ -86,7 +86,9 @@
                 <papertitle> (Working title) Real-time Human NeRF</papertitle>
               </a>-->
               <br>
-              <strong>Jaeyoung Chung</strong>,
+              <strong>Jaeyoung Chung</strong>, 
+              Chunyu Wang, 
+              Kyoung Mu Lee
               <br>
               <em>Working on</em>
               <br>
@@ -192,12 +194,12 @@
           <!---->
           <tr onmouseout="VIO_stop()" onmouseover="VIO_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='VIO_image'><video  width=100% height=100% muted autoplay loop>
-                <source src="imgs/VIO.mp4" type="video/mp4">
+              <div class="one", style="display:table-cell;vertical-align:middle">
+                <div class="two" id='VIO_image'><video  width=100% muted autoplay loop>
+                <source src="imgs/VIO_hmns_20sec.mp4" type="video/mp4">
                 Your browser does not support the video tag.
                 </video></div>
-                <img src='imgs/VIO.png' width="160">
+                <img src='imgs/VIO_hmns_20sec.png' width="160">
               </div>
               <script type="text/javascript">
                 function VIO_start() {
@@ -227,7 +229,6 @@
               <em>IEEE Transactions on Intelligent Transportation Systems</em>, 2020
               <br>
               <p></p>
-              <p>We propose a precise navigation system using wheel odometry, Low-Grade inertial measurement unit, and monocular camera in Urban Area.</p>
               <!---->
               <a href="https://ieeexplore.ieee.org/document/9110201">
                 <papertitle>Effect of Wheel Odometer on Low-Cost Visual-Inertial Navigation System for Ground Vehicles</papertitle>
@@ -245,7 +246,7 @@
               <em>IEEE/ION Position, Location and Navigation Symposium (PLANS)</em>, 2020
               <br>
               <p></p>
-              <p>We analyze the effect of wheel odometer on low cost visual-inertial navigation system.</p>
+              <!--<p>We analyze the effect of wheel odometer on low cost visual-inertial navigation system.</p>-->
               <!---->
               <a href="https://ieeexplore.ieee.org/abstract/document/8899485">
                 <papertitle>Rapid Initialization using Relative Pose Constraints in Stereo Visual-Inertial Odometry</papertitle>
@@ -259,11 +260,8 @@
               <em>IEEE 15th International Conference on Control and Automation (ICCA)</em>, 2019
               <br>
               <p></p>
-              <p>We propose a method for rapid initialization in Stereo visual-inertial odometry using relative pose constraints.</p>
-
-              <br>
-              <a href="https://github.com/robot0321/visual_inertial_odometry_simualtion">Related code (Pended)</a>
-              <p></p>
+              <!--<p>We propose a method for rapid initialization in Stereo visual-inertial odometry using relative pose constraints.</p>-->
+              <p>We propose a precise navigation system using wheel odometry, Low-Grade inertial measurement unit, and monocular camera in Urban Area. <a href="https://github.com/robot0321/visual_inertial_odometry_simualtion">VIO Simluation code (Pended)</a></p>
             </td>
           </tr> 
 <!--
@@ -359,27 +357,27 @@
       </tbody></table>
 
       <table width="100%" align="center" border="0px" cellpadding="20"><tbody> 
-        <tr onmouseout="ExtendiNeRF_stop()" onmouseover="ExtendiNeRF_start()">
+        <tr onmouseout="ExtendediNeRF_stop()" onmouseover="ExtendediNeRF_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">
             <div class="one">
-              <div class="two" id='ExtendiNeRF_image'>
-              <img src='imgs/.jpg' height=100% width=100%>
-              <!--<video  width=100% height=100% muted autoplay loop>
-                <source src="imgs/SNUEwheel.mp4" type="video/mp4">
+              <div class="two" id='ExtendediNeRF_image'>
+              <!-- <img src='imgs/Ex.jpg' height=100% width=100%> -->
+              <video  width=100% height=100% muted autoplay loop>
+                <source src="imgs/ExtendediNeRF.mp4" type="video/mp4">
                 Your browser does not support the video tag.
-              </video>-->
+              </video>
               </div>
-              <img src='imgs/.jpg' height=100% width=100%>
+              <img src='imgs/ExtendediNeRF2.png' height=100% width=100%>
             </div>
             <script type="text/javascript">
-              function ExtendiNeRF_start() {
-                document.getElementById('ExtendiNeRF_image').style.opacity = "1";
+              function ExtendediNeRF_start() {
+                document.getElementById('ExtendediNeRF_image').style.opacity = "1";
               }
   
-              function ExtendiNeRF_stop() {
-                document.getElementById('ExtendiNeRF_image').style.opacity = "0";
+              function ExtendediNeRF_stop() {
+                document.getElementById('ExtendediNeRF_image').style.opacity = "0";
               }
-              ExtendiNeRF_stop()
+              ExtendediNeRF_stop()
             </script>
           </td>
           <td style="padding:20px;width:75%;vertical-align:middle">
@@ -389,13 +387,59 @@
             <br>
             Course project in spring 2021
             <br>
-            poster
+            <a href="data/ExtendediNeRF_poster.pdf">poster</a>
             /
-            <a href="https://www.youtube.com/watch?v=Gkuvqe-rUXc">video1 (success case1)</a> / <a href="https://www.youtube.com/watch?v=ZNC_bzAnvog">video1 (success case2)</a>
-            /
-            <a href="https://www.youtube.com/watch?v=q2TjwB5kbEU">video1 (failure case1)</a> / <a href="https://www.youtube.com/watch?v=NfFkjghk7gg">video1 (failure case2)</a>
+            <a href="https://youtube.com/playlist?list=PLL_nc6s8JEmvBhGEOYR8pJhFn4e7VX0tH">video</a> 
             <p></p>
             <p>We reproduce <a href="https://yenchenlin.me/inerf/">iNeRF</a> and improve the performance of pose estimation in NeRF by using feature matcing method such as <a href="https://github.com/magicleap/SuperGluePretrainedNetwork">SuperGlueNetwork</a>.</p>
+          </td>
+        </tr> 
+        <!---->
+        <tr onmouseout="RocketHanaro_stop()" onmouseover="RocketHanaro_start()">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one", style="display:table-cell;vertical-align:middle">
+              <div class="two" id='RocketHanaro_image'>
+              <!-- <img src='imgs/RocketHanaro.jpg' height=100%, width=100%> -->
+              <video width=98% muted autoplay loop>
+                <source src="imgs/NURA2017_Identity_trimmed.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              </div>
+              <img src='imgs/NURA2016.jpeg' width=100%> <!--style="margin-left: auto; margin-right: auto; display: block;">-->
+            </div>
+            <script type="text/javascript">
+              function RocketHanaro_start() {
+                document.getElementById('RocketHanaro_image').style.opacity = "1";
+              }
+  
+              function RocketHanaro_stop() {
+                document.getElementById('RocketHanaro_image').style.opacity = "0";
+              }
+              RocketHanaro_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:middle">
+            <papertitle>Sounding Rocket Development</papertitle>
+            <br>
+            <strong>Jaeyoung Chung</strong>, Daehwan Kim, Beom Park, Soobeom Heo, Deokhyun Kim, and other Hanaro Team members
+            <br>
+            <em>Gold prize in <a href="https://1992nura.wixsite.com/nura/home">Contest held by The National Universities' Rocket Association (NURA)</a></em>, summer 2017
+            <br>
+            <a href="http://hanaro.snu.ac.kr/about/">Hanaro homepage</a>
+            /
+            <a href="https://youtu.be/Xm_IHOmMjXc">promotion video</a>
+            /
+            <a href="https://www.youtube-nocookie.com/embed/YYeq12_Y2Po?start=23&end=76&autoplay=1">2016 NURA video</a>
+            /
+            <a href="https://www.youtube-nocookie.com/embed/9uu3IjO5AUo?start=706&end=902&autoplay=1">2017 NURA video</a>
+            /
+            <br> 
+            <a href="https://github.com/robot0321/MPU6050_Servo_rocket_control">code (rocket pin control)</a>
+            /
+            <a href="https://github.com/robot0321/INS_matlab">data(recorded INS data during rocket flight)</a>
+            <p></p>
+            <p>We develop whole solid sounding rockets from engine, fuel, body, electric system including wing control, parachute control, ignition control, data(pressure, accel, rotation) measurement, and communication system. </p>
+            <p>I was a leader of electric system team. (2016 ~ 2017)</p>
           </td>
         </tr> 
         <!---->
@@ -403,13 +447,13 @@
           <td style="padding:20px;width:25%;vertical-align:middle">
             <div class="one">
               <div class="two" id='AlphaD_image'>
-              <img src='imgs/.jpg' height=100% width=100%>
+              <img src='imgs/AlphaDrone2.jpg' style="display: block; margin: 0 auto; width:100%; height:100%;">
               <!--<video  width=100% height=100% muted autoplay loop>
                 <source src="imgs/SNUEwheel.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>-->
               </div>
-              <img src='imgs/.jpg' height=100% width=100%>
+              <img src='imgs/AlphaDrone.jpg' style="display: block; margin: 0 auto; width:100%; height:100%;">
             </div>
             <script type="text/javascript">
               function AlphaD_start() {
@@ -425,7 +469,7 @@
           <td style="padding:20px;width:75%;vertical-align:middle">
             <papertitle>Alpha-D: Developing drone controlled by reinforcement learning</papertitle>
             <br>
-            Yongjae Kim, <strong>Jaeyoung Chung</strong>, Taehyung Kim, Hyerin Choi, Kevin Nam
+            Yongjae Kim, <strong>Jaeyoung Chung</strong>, Joonyoung Jang, Chanyoung Jung
             <br>
             Spring ~ fall 2016
             <br>
@@ -463,63 +507,19 @@
           <td style="padding:20px;width:75%;vertical-align:middle">
             <papertitle>SNU E-Wheel</papertitle>
             <br>
-            <strong>Jaeyoung Chung</strong>, Taehyung Kim, Hyerin Choi, Kevin Nam
+            Taehyung Kim, <strong>Jaeyoung Chung</strong>, <a href="https://jigang.kim/">Jigang Kim</a>, Hyerin Choi, Kevin Nam
             <br>
             <em>First prize in <a href="https://https://eng.snu.ac.kr/creative_award?creativity_idx=316/">Dongbu Award for SNU Creative Design Fair</a></em>, summer and fall 2015
             <br>
-            Recorded video
+            <a href="data/SNUEWheel_poster.pdf">poster</a>
+            /
+            <a href="https://youtu.be/H3var6VjRqY">video</a>
             <!--<a href="https://myavartanoo.github.io/3dias/">project page</a>
             /
             <a href="https://www.youtube.com/watch?v=JtBS4KBcKVc">video</a>-->
             <p></p>
             <p>We develop an electronic bicycle with an interchangeable front wheel between motor-powered wheel and normal. We design the motor control system deliberately for similar user experiences with pedal assistance system (PAS).</p>
-          </td>
-        </tr> 
-        <!---->
-        <tr onmouseout="RocketHanaro_stop()" onmouseover="RocketHanaro_start()">
-          <td style="padding:20px;width:25%;vertical-align:middle">
-            <div class="one", style="display:table-cell;vertical-align:middle">
-              <div class="two" id='RocketHanaro_image'>
-              <!-- <img src='imgs/RocketHanaro.jpg' height=100%, width=100%> -->
-              <video width=98% muted autoplay loop>
-                <source src="imgs/NURA2017_Identity_trimmed.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              </div>
-              <img src='imgs/NURA2016.jpeg' width=100%> <!--style="margin-left: auto; margin-right: auto; display: block;">-->
-            </div>
-            <script type="text/javascript">
-              function RocketHanaro_start() {
-                document.getElementById('RocketHanaro_image').style.opacity = "1";
-              }
-  
-              function RocketHanaro_stop() {
-                document.getElementById('RocketHanaro_image').style.opacity = "0";
-              }
-              RocketHanaro_stop()
-            </script>
-          </td>
-          <td style="padding:20px;width:75%;vertical-align:middle">
-            <papertitle>Sounding Rocket Development</papertitle>
-            <br>
-            <strong>Jaeyoung Chung</strong>, Daehwan Kim, Beom Park, Soobeom Heo, Deokhyun Kim, and other Hanaro Team members
-            <br>
-            <em>Gold prize in <a href="https://1992nura.wixsite.com/nura/home">Contest held by The National Universities' Rocket Association (NURA)</a></em>, summer 2017
-            <br>
-            <a href="http://hanaro.snu.ac.kr/about/">Homepage</a>
-            /
-            <a href="https://youtu.be/Xm_IHOmMjXc">Promotion video</a>
-            /
-            <a href="https://www.youtube-nocookie.com/embed/YYeq12_Y2Po?start=23&end=76&autoplay=1">2016 NURA contest</a>
-            /
-            <a href="https://www.youtube-nocookie.com/embed/9uu3IjO5AUo?start=706&end=902&autoplay=1">2017 NURA contest</a>
-            <br>
-            <a href="https://github.com/robot0321/MPU6050_Servo_rocket_control">code (rocket pin control)</a>
-            /
-            <a href="https://github.com/robot0321/INS_matlab">data(recorded INS data during rocket flight)</a>
-            <p></p>
-            <p>We develop whole solid sounding rockets from engine, fuel, body, electric system including wing control, parachute control, ignition control, data(pressure, accel, rotation) measurement, and communication system. </p>
-            <p>I was a leader of electric system team. (2016 ~ 2017)</p>
+            <p>I mainly develop embedded system and algorithm including power, circuit, PID control, etc.</p>
           </td>
         </tr> 
 
