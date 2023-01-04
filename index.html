@@ -2,14 +2,14 @@
 <!DOCTYPE HTML>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151254114-1"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPKZS1H0X8"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-151254114-1');
+    gtag('config', 'G-VPKZS1H0X8');
   </script>
   
   <title>Jaeyoung Chung</title>
@@ -20,6 +20,15 @@
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
   <!-- <link rel="icon" type="image/png" href="img/seal_icon.png"> -->
 
+  <script>
+    window.onload = function(){
+      document.getElementById("teamproj").style.display="none";
+      document.getElementById("miniproj").style.display="none";
+      document.getElementById("Hobby").style.display="none";
+    }
+  </script>
+  
+
 </head>
 
 <body>
@@ -29,7 +38,7 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <p align="left">
             <font size="2">
-              Last updated: Dec. 2022
+              Last updated: Jan. 2023
             </font>
           </p>
           <tr style="padding:0px">
@@ -266,15 +275,62 @@
           </tr> 
       </tbody></table>
       
+
       <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
         <tr>
           <td>
-            <heading>Team Project</heading>
+            <heading>Award</heading>
           </td>
         </tr>
       </tbody></table>
-      
-      <table width="100%" align="center" border="0px" cellpadding="20"><tbody> 
+      <table width="100%" align="center" border="0" cellpadding="20"><tbody>
+        <tr>
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <img src="imgs/trophy.png" alt="trophy" width="160"></td>
+          <td width="75%" valign="center">
+          <p>
+            <a href="imgs/StarofTomorrow_MSRA_JaeyoungChung.jpg">
+              <papertitle>“Stars of Tomorrow” Award in Microsoft Research Asia Internship (2022)</papertitle>
+            </a>
+            <!--
+            <br><br>
+            <a href="imgs/huggjax_certificate.png">
+            <papertitle>Second Prize at HuggingFace Flax/JAX community week (2021)</papertitle>
+            </a>-->
+            <br><br>
+            <a href="imgs/IPIU_Goldprize.png">
+              <papertitle>Gold Prize at 33th Workshop on Image Processing and Image Understanding (2021)</papertitle>
+            </a>
+            <br><br>
+            <a href="imgs/snuewheel_award.jpg">
+              <papertitle>First Prize at Dongbu Award for SNU Creative Design Fair (2015)</papertitle>
+            </a>
+            <br>
+          </p>
+          </td>
+        </tr>
+      </tbody></table>
+      <br>
+
+
+      <script type="text/javascript">
+        function GetShow0(){
+          var con = document.getElementById("teamproj");
+          if(con.style.display=="none"){
+            con.style.display="block";
+          }else{
+            con.style.display="none";
+          }
+        }
+      </script>
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
+        <tr>
+          <td>
+            <heading>Team Project <a href="javascript:GetShow0()">(Click)</a></heading>
+          </td>
+        </tr>
+      </tbody></table>
+      <table width="100%" align="center" border="0px" cellpadding="20" id="teamproj"><tbody> 
         <!--
         <tr onmouseout="ExtendediNeRF_stop()" onmouseover="ExtendediNeRF_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">
@@ -477,89 +533,73 @@
         <!---->
       </tbody></table>
 
+
+      <script type="text/javascript">
+        function GetShow1(){
+          var con = document.getElementById("miniproj");
+          if(con.style.display=="none"){
+            con.style.display="block";
+          }else{
+            con.style.display="none";
+          }
+        }
+      </script>
       <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
         <tr>
           <td>
-            <heading>Mini Project</heading>
+            <heading>Mini Project <a href="javascript:GetShow1()">(Click)</a></heading>
           </td>
         </tr>        
       </tbody></table>
-      <table width="100%" align="center" border="0" cellpadding="20"><tbody>
-      <tr>
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one">
-            <img src='imgs/mini_RCcar.jpg' alt='missing' width="160">
-            <p align="center">Handmade RCcar</p>
-          </div></td>
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one">
-            <img src='imgs/mini_LogicDesignProject.jpg' alt='missing' width="160">
-            <p align="center">LogicDesigned TankGame</p>
-          </div></td>
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one">
-            <img src='imgs/mini_jetpulse.jpg' alt='missing' width="160">
-            <p align="center">Pulsejet-powered Cart</p>
-          </div></td>
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one">
-            <img src='imgs/mini_hnpboard.jpg' alt='missing' width="160">
-            <p align="center">Finger-controlled Carnival Board</p>
-          </div></td>
-        <!-- <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one">
-            <img src='imgs/mini_blower.jpg' alt='missing' width="160">
-            <p align="center">Wind Blower from Debris</p>
-          </div></td> -->
-      </tr>
+      <table width="100%" align="center" border="0" cellpadding="20" id="miniproj"><tbody>
+        <tr>
+          <td style="padding-left:20px;padding-bottom:50px;width:25%;vertical-align:middle">
+            <div class="one">
+              <img src='imgs/mini_RCcar.jpg' alt='missing' width="160">
+              <p align="center">Handmade RCcar</p>
+            </div></td>
+          <td style="padding-left:20px;padding-bottom:50px;width:25%;vertical-align:middle">
+            <div class="one">
+              <img src='imgs/mini_LogicDesignProject.jpg' alt='missing' width="160">
+              <p align="center">LogicDesigned TankGame</p>
+            </div></td>
+          <td style="padding-left:20px;padding-bottom:50px;width:25%;vertical-align:middle">
+            <div class="one">
+              <img src='imgs/mini_jetpulse.jpg' alt='missing' width="160">
+              <p align="center">Pulsejet-powered Cart</p>
+            </div></td>
+          <td style="padding-left:20px;padding-bottom:50px;width:25%;vertical-align:middle">
+            <div class="one">
+              <img src='imgs/mini_hnpboard.jpg' alt='missing' width="160">
+              <p align="center">Finger-controlled Carnival Board</p>
+            </div></td>
+          <!-- <td style="padding:20px;padding-bottom:50px;width:25%;vertical-align:middle">
+            <div class="one">
+              <img src='imgs/mini_blower.jpg' alt='missing' width="160">
+              <p align="center">Wind Blower from Debris</p>
+            </div></td> -->
+        </tr>
       </tbody></table>
-      <br><br>
-      <br>
 
+
+      <!-- <script type="text/javascript">
+        function GetShow(){
+          var con = document.getElementById("Teaching");
+          if(con.style.display=="none"){
+            con.style.display="block";
+          }else{
+            con.style.display="none";
+          }
+        }
+      </script>
       <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
         <tr>
           <td>
-            <heading>Award</heading>
+            <heading>Teaching <a href="javascript:GetShow()">(Click)</a></heading> 
           </td>
         </tr>
       </tbody></table>
-      <table width="100%" align="center" border="0" cellpadding="20"><tbody>
-        <tr>
-          <td style="padding:20px;width:25%;vertical-align:middle">
-            <img src="imgs/trophy.png" alt="trophy" width="160"></td>
-          <td width="75%" valign="center">
-          <p>
-            <a href="imgs/StarofTomorrow_MSRA_JaeyoungChung.jpg">
-              <papertitle>“Stars of Tomorrow” Award in Microsoft Research Asia Internship (2022)</papertitle>
-            </a>
-            <!--
-            <br><br>
-            <a href="imgs/huggjax_certificate.png">
-            <papertitle>Second Prize at HuggingFace Flax/JAX community week (2021)</papertitle>
-            </a>-->
-            <br><br>
-            <a href="imgs/IPIU_Goldprize.png">
-              <papertitle>Gold Prize at 33th Workshop on Image Processing and Image Understanding (2021)</papertitle>
-            </a>
-            <br><br>
-            <a href="imgs/snuewheel_award.jpg">
-              <papertitle>First Prize at Dongbu Award for SNU Creative Design Fair (2015)</papertitle>
-            </a>
-            <br>
-          </p>
-          </td>
-        </tr>
-      </tbody></table>
-      <br>
-
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
-        <tr>
-          <td>
-            <heading>Teaching</heading>
-          </td>
-        </tr>
-      </tbody></table>
-      <table width="100%" align="center" border="0" cellpadding="20"><tbody>
+      <table width="100%" align="center" border="0" cellpadding="20" id="Teaching"><tbody>
         <tr>
           <td style="padding:20px;width:25%;vertical-align:middle">
             <img src="imgs/teaching.png" alt="trophy" width="160"></td>
@@ -576,16 +616,26 @@
           </td>
         </tr>
       </tbody></table>
-      <br>
+      <br> -->
 
+      <script type="text/javascript">
+        function GetShow2(){
+          var con = document.getElementById("Hobby");
+          if(con.style.display=="none"){
+            con.style.display="block";
+          }else{
+            con.style.display="none";
+          }
+        }
+      </script>
       <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
         <tr>
           <td>
-            <heading>Hobby</heading>
+            <heading>Hobby <a href="javascript:GetShow2()">(Click)</a></heading>
           </td>
         </tr>        
       </tbody></table>
-      <table width="100%" align="center" border="0" cellpadding="20"><tbody>
+      <table width="100%" align="center" border="0" cellpadding="20" id="Hobby"><tbody>
       <tr>
         <td style="padding:20px;width:25%;vertical-align:middle">
           <div class="one">
