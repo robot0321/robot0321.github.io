@@ -22,8 +22,9 @@
 
   <script>
     window.onload = function(){
-      document.getElementById("teamproj").style.display="none";
+      document.getElementById("teamproj").style.display="block";
       document.getElementById("miniproj").style.display="none";
+      document.getElementById("Teaching").style.display="none";
       document.getElementById("Hobby").style.display="none";
     }
   </script>
@@ -38,7 +39,7 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <p align="left">
             <font size="2">
-              Last updated: Jan. 2023
+              Last updated: Nov. 2023
             </font>
           </p>
           <tr style="padding:0px">
@@ -66,6 +67,9 @@
             </td>
           </tr>
         </tbody></table>
+
+        <p align="left"><font size="3">⬇️ Hover for videos!</font></p>
+        <hr/>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
@@ -109,6 +113,102 @@
               <p>Real-time framework on NeRF-based dynamic human body</p>
             </td>
           </tr> -->
+          <!---->
+          <tr onmouseout="LucidDream_stop()" onmouseover="LucidDream_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='LucidDream_image'>
+                  <video  width=100% height=100% muted autoplay loop>
+                    <source src="imgs/luciddreamer.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <img src='imgs/luciddreamlogo.png' width="160">
+              </div>
+              <script type="text/javascript">
+                function LucidDream_start() {
+                  document.getElementById('LucidDream_image').style.opacity = "1";
+                }
+
+                function LucidDream_stop() {
+                  document.getElementById('LucidDream_image').style.opacity = "0";
+                }
+                LucidDream_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="https://luciddreamer-cvlab.github.io/">
+                <papertitle>LucidDreamer: Domain-free Generation of 3D Gaussian Splatting Scenes</papertitle>
+              </a>
+              <br>
+              <strong>Jaeyoung Chung*</strong>,
+              <a href="https://scholar.google.com/citations?user=s0uhy1gAAAAJ&hl=ko">Suyoung Lee*</a>,
+              <a href="https://hygenie1228.github.io/">Hyeongjin Nam</a>,
+              <a href="https://jaerinlee.com/">Jaerin Lee</a>,
+              <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>,
+              <br>
+              <em>Under Review</em>
+              <br>
+              <a href="https://luciddreamer-cvlab.github.io/">project page</a>
+              /
+              <a href="https://arxiv.org/abs/2311.13384">arXiv</a>
+              /
+              code
+              <!--
+              <a href="">project page</a>
+              /
+              <a href="https://youtu.be/YStDS2-Ln1s">video</a>
+              -->
+              <p></p>
+              <p>We developed a 3D Gaussian splatting scene generation pipeline that iteratively generates and aligns parts of the scene.</p>
+            </td>
+          </tr> 
+          <!---->
+          <tr onmouseout="DepthRegGS_stop()" onmouseover="DepthRegGS_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='DepthRegGS_image'><video  width="160" height="160" muted autoplay loop>
+                <source src="imgs/DepthRegGS.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video></div>
+                <img src='imgs/DepthRegGS.jpg' width="160" height="160">
+              </div>
+              <script type="text/javascript">
+                function DepthRegGS_start() {
+                  document.getElementById('DepthRegGS_image').style.opacity = "1";
+                }
+
+                function DepthRegGS_stop() {
+                  document.getElementById('DepthRegGS_image').style.opacity = "0";
+                }
+                DepthRegGS_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="DepthRegGS/index.html">
+                <papertitle>Depth-Regularized Optimization for 3D Gaussian Splatting in Few-Shot Images</papertitle>
+              </a>
+              <br>
+              <strong>Jaeyoung Chung</strong>,
+              <a href="https://taekkii.github.io">Jeongtaek Oh</a>,
+              <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>,
+              <br>
+              <em>Under Review</em>
+              <br>
+              <a href="DepthRegGS/index.html">project page</a>
+              /
+              <a href="https://arxiv.org/abs/2311.13398">arXiv</a>
+              /
+              code
+              <!--
+              <a href="">project page</a>
+              /
+              <a href="https://youtu.be/YStDS2-Ln1s">video</a>
+              -->
+              <p></p>
+              <p>We introduce a method to optimize Gaussian splatting with a limited image set, mitigating overfitting by incorporating a estimated depth map as a geometric guide.</p>
+            </td>
+          </tr> 
           <!---->
           <tr onmouseout="MEILNeRF_stop()" onmouseover="MEILNeRF_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
@@ -205,8 +305,8 @@
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one", style="display:table-cell;vertical-align:middle">
                 <div class="two" id='VIO_image'><video  width=100% muted autoplay loop>
-                <source src="imgs/VIO_hmns_20sec.mp4" type="video/mp4">
-                Your browser does not support the video tag.
+                  <source src="imgs/VIO_hmns_20sec.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
                 </video></div>
                 <img src='imgs/VIO_hmns_20sec.png' width="160">
               </div>
@@ -274,46 +374,9 @@
             </td>
           </tr> 
       </tbody></table>
-      
-      <hr/>
-      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
-        <tr>
-          <td>
-            <heading>Award</heading>
-          </td>
-        </tr>
-      </tbody></table>
-      <table width="100%" align="center" border="0" cellpadding="20"><tbody>
-        <tr>
-          <td style="padding:20px;width:25%;vertical-align:middle">
-            <img src="imgs/trophy.png" alt="trophy" width="160"></td>
-          <td width="75%" valign="center">
-          <p>
-            <a href="imgs/StarofTomorrow_MSRA_JaeyoungChung.jpg">
-              <papertitle>“Stars of Tomorrow” Award in Microsoft Research Asia Internship (2022)</papertitle>
-            </a>
-            <!--
-            <br><br>
-            <a href="imgs/huggjax_certificate.png">
-            <papertitle>Second Prize at HuggingFace Flax/JAX community week (2021)</papertitle>
-            </a>-->
-            <br><br>
-            <a href="imgs/IPIU_Goldprize.png">
-              <papertitle>Gold Prize at 33th Workshop on Image Processing and Image Understanding (2021)</papertitle>
-            </a>
-            <br><br>
-            <a href="imgs/snuewheel_award.jpg">
-              <papertitle>First Prize at Dongbu Award for SNU Creative Design Fair (2015)</papertitle>
-            </a>
-            <br>
-          </p>
-          </td>
-        </tr>
-      </tbody></table>
-      <br>
 
       <hr/>
-      <script type="text/javascript">
+      <!-- <script type="text/javascript">
         function GetShow0(){
           var con = document.getElementById("teamproj");
           if(con.style.display=="none"){
@@ -322,11 +385,11 @@
             con.style.display="none";
           }
         }
-      </script>
+      </script>-->
       <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
         <tr>
           <td>
-            <heading>Team Project <a href="javascript:GetShow0()">(Click)</a></heading>
+            <heading>Team Project </heading>
           </td>
         </tr>
       </tbody></table>
@@ -534,6 +597,42 @@
       </tbody></table>
 
       <hr/>
+      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
+        <tr>
+          <td>
+            <heading>Award</heading>
+          </td>
+        </tr>
+      </tbody></table>
+      <table width="100%" align="center" border="0" cellpadding="20" id="Award"><tbody>
+        <tr>
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <img src="imgs/trophy.png" alt="trophy" width="160"></td>
+          <td width="75%" valign="center">
+          <p>
+            <a href="imgs/StarofTomorrow_MSRA_JaeyoungChung.jpg">
+              <papertitle>“Stars of Tomorrow” Award in Microsoft Research Asia Internship (2022)</papertitle>
+            </a>
+            <!--
+            <br><br>
+            <a href="imgs/huggjax_certificate.png">
+            <papertitle>Second Prize at HuggingFace Flax/JAX community week (2021)</papertitle>
+            </a>-->
+            <br><br>
+            <a href="imgs/IPIU_Goldprize.png">
+              <papertitle>Gold Prize at 33th Workshop on Image Processing and Image Understanding (2021)</papertitle>
+            </a>
+            <br><br>
+            <a href="imgs/snuewheel_award.jpg">
+              <papertitle>First Prize at Dongbu Award for SNU Creative Design Fair (2015)</papertitle>
+            </a>
+            <br>
+          </p>
+          </td>
+        </tr>
+      </tbody></table>
+
+      <hr/>
       <script type="text/javascript">
         function GetShow1(){
           var con = document.getElementById("miniproj");
@@ -581,8 +680,8 @@
         </tr>
       </tbody></table>
 
-
-      <!-- <script type="text/javascript">
+      <hr/>
+      <script type="text/javascript">
         function GetShow(){
           var con = document.getElementById("Teaching");
           if(con.style.display=="none"){
@@ -602,7 +701,7 @@
       <table width="100%" align="center" border="0" cellpadding="20" id="Teaching"><tbody>
         <tr>
           <td style="padding:20px;width:25%;vertical-align:middle">
-            <img src="imgs/teaching.png" alt="trophy" width="160"></td>
+            <img src="imgs/teaching.png" alt="teaching" width="160"></td>
           <td width="75%" valign="center">
           <p>
             <br>
@@ -611,12 +710,11 @@
             <papertitle>Taught freshman embedded system design (Mar. - Jun. 2016)</papertitle>
             <br><br>
             <papertitle>Taught high school students Arduino at Gwangyang Jecheol high school (Jan. - Feb. 2015)</papertitle>
-            <br><br>
+            <br>
           </p>
           </td>
         </tr>
       </tbody></table>
-      <br> -->
 
       <hr/>
       <script type="text/javascript">
