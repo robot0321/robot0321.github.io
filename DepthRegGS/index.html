@@ -1,0 +1,472 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPKZS1H0X8"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VPKZS1H0X8');
+  </script>
+  
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+
+  <!-- bulma css template -->
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./css/twentytwenty.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-carousel.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.event.move.js"></script>
+  <script src="./js/jquery.twentytwenty.js"></script>
+  <script src="./js/index.js"></script>
+
+  <!-- ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- model viewer -->
+  <!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script> -->
+
+  <!-- LaTeX viewer -->
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- icon -->
+  <!-- <link rel="icon" href="./image/favicon.ico"> -->
+  <title>
+    DepthRegGS
+  </title>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://cv.snu.ac.kr">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://cv.snu.ac.kr/index.php/publication-international">
+            Computer Vision Lab Publications
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container has-text-centered">
+
+    <!-- paper title -->
+    <p class="title is-2 publication-title">
+    Depth-Regularized Optimization for </br>3D Gaussian Splatting in Few-Shot Images
+    </p>
+
+    <!-- publication -->
+    <p class="subtitle is-4"> Arxiv 2023 </p>
+
+    <!-- authors -->
+    <p class="title is-4 publication-authors"> 
+      <a href="https://robot0321.github.io" target="_blank">Jaeyoung Chung</a><sup></sup>, 
+      <a href="https://taekkii.github.io" target="_blank">Jeongtaek Oh</a><sup></sup>,
+      <a href="https://cv.snu.ac.kr/index.php/~kmlee/" target="_blank">Kyoung Mu Lee</a><sup></sup>
+    </p>
+
+    <!-- affiliations -->
+    <p class="subtitle is-5 publication-authors"> 
+    <sup></sup> Computer Vision Lab, Seoul National University &nbsp; </br> </br>
+    <a href="https://cv.snu.ac.kr"> <img style="width:20%" src="image/logo_cvlab.png"> </a>
+    </p>
+    <!-- <div class="is-size-5 publication-authors"> -->
+    <!-- </div> -->
+
+
+    <!-- other links -->
+    <div class="is-flex is-justify-content-center">
+
+      <!-- PDF Link. -->
+      <!-- <span class="icon-text mx-1">
+        <a href="https://arxiv.org/pdf/2311.13398"
+           class="external-link button is-normal is-rounded is-dark">
+          <span class="icon">
+              <i class="fas fa-file-pdf"></i>
+          </span>
+          <span>Paper</span>
+        </a>
+      </span> -->
+      <span class="icon-text mx-1">
+        <a href="https://arxiv.org/abs/2311.13398"
+           class="external-link button is-normal is-rounded is-dark">
+          <span class="icon">
+              <i class="ai ai-arxiv"></i>
+          </span>
+          <span>arXiv</span>
+        </a>
+      </span>
+      <span class="icon-text mx-1">
+        <a href="https://github.com/anonymous-luciddreamer/LucidDreamer"
+           class="external-link button is-normal is-rounded is-dark">
+          <span class="icon">
+              <ion-icon name="logo-github"></ion-icon>
+          </span>
+          <span> Code (Releasing Soon!) </span>
+        </a>
+      </span>
+    </div>
+   
+  </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop has-text-centered">
+        <!-- abstract -->
+        <p class="title is-3 mt-5 has-text-centered"> Abstract </p>
+        <p class="content is-size-6 has-text-justified">
+        In this paper, we present a method to optimize Gaussian splatting with a limited number of images while avoiding overfitting. 
+        Representing a 3D scene by combining numerous Gaussian splats has yielded outstanding visual quality. 
+        However, it tends to overfit the training views when only a small number of images are available. 
+        To address this issue, we introduce <b>a dense depth map as a geometry guide</b> to mitigate overfitting. 
+        We obtained the depth map using a pre-trained monocular depth estimation model and aligning the scale and offset using sparse COLMAP feature points. 
+        The adjusted depth aids in the color-based optimization of 3D Gaussian splatting, mitigating floating artifacts, and ensuring adherence to geometric constraints. 
+        We verify the proposed method on the NeRF-LLFF dataset with varying numbers of few images. 
+        Our approach demonstrates robust geometry compared to the original method that relies solely on images.
+        </p>
+
+        <!-- main figure -->
+        <!-- <p class="title is-3 mt-5 has-text-centered"> Method </p> -->
+        <img src="image/DRGSmethod.jpg", alt="Algorithm description of LucidDreamer", width="100%", height="100%"> </img>
+        <p class="content has-text-centered is-size-5">
+        We optimize the Gaussian splatting using dense depth maps adjusted with the COLMAP point cloud. 
+        By incorporating depth maps to regulate the geometry of the 3D scene, our model successfully reconstructs scenes using a limited number of images.
+        </p>
+    </div>
+    <br/> <br/>
+
+
+    
+    <!-- ablations -->
+    <section class="hero is-light is-small">
+        <br/>
+        <p class="title is-3 mt-5 has-text-centered"> Experiment Result (2-shot) </p>
+        <div class="hero-body">
+          <div class="container">
+            <div id="results-carousel1" class="carousel results-carousel">
+              <div class="item">
+                <div class="twentytwenty-container" data-orientation="horizontal" ratio="2.0">
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method1_fern_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method2_fern_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="twentytwenty-container" data-orientation="horizontal" ratio="2.0">
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method1_flower_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method2_flower_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="twentytwenty-container" data-orientation="horizontal" ratio="2.0">
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method1_fortress_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method2_fortress_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="twentytwenty-container" data-orientation="horizontal" ratio="2.0">
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method1_horns_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method2_horns_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="item">
+                <div class="twentytwenty-container" data-orientation="horizontal" ratio="2.0">
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method1_orchids_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method2_orchids_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div> -->
+              <div class="item">
+                <div class="twentytwenty-container" data-orientation="horizontal" ratio="2.0">
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method1_room_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method2_room_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="twentytwenty-container" data-orientation="horizontal" ratio="2.0">
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method1_trex_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="video">
+                    <video poster="" id="fantasy_back" autoplay controls muted loop playsinline height="100%">
+                      <source src="./video/method2_trex_2shot.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+        <!-- </section> -->
+        <br/> 
+        <div class="hero-body">
+            <div class="container">
+            <!-- <section class="hero is-light is-small"> -->
+            <p class="title is-3 mt-5 has-text-centered"> Experiment Result (2-shot) </p>
+            <p class="content has-text-centered is-size-5">
+                <!-- &#128071; <b>Click and drag</b> (navigate) / <b>shift and scroll</b> (zoom) <br> -->
+                <b>3DGS</b> (left) / <b>Ours</b> (right) 
+            </p> 
+            <div>
+                <iframe id="3DGS_fern_2shot" src='https://my.spline.design/untitled-17c9747ce9a293d9b651b10cad17130f/' frameborder='0' width="49.5%" height="480"></iframe>
+                <iframe id="Ours_fern_2shot" src='https://my.spline.design/untitled-28d802946f3f1d0d35f7396b3634fd7a/' frameborder='0' width="49.5%" height="480"></iframe>
+            </div>
+            <br/>
+            <div>
+                <iframe id="3DGS_room_2shot" src='https://my.spline.design/untitled-fe2485543f74ce6ceb45852c961c205a/' frameborder='0' width="49.5%" height="480"></iframe>
+                <iframe id="Ours_fern_2shot" src='https://my.spline.design/untitled-dece9c4a7da3904be161fe5fb06d1309/' frameborder='0' width="49.5%" height="480"></iframe>
+            </div>
+            <p class="content has-text-centered is-size-5">
+                &#128070; <b>Click and drag</b> (navigate) / <b>shift and scroll</b> (zoom) <br>
+                <!-- <b>3DGS</b> (left) / <b>Ours</b> (right)  -->
+            </p> 
+        </div>
+        </div>
+    </section>
+    <!-- </div> -->
+    <br/> <br/>
+
+    <script>
+        bulmaCarousel.attach('#results-carousel1', {
+            slidesToScroll: 1,
+            slidesToShow: 4
+        });
+        $(function(){
+            $(".twentytwenty-container").twentytwenty({
+                before_label: '3DGS', // Set a custom before label
+                after_label: 'Ours', // Set a custom after label
+                default_offset_pct: 0.5,
+                click_to_move: false
+            });
+        });
+    </script>
+
+    <!--  -->
+    <!--  -->
+    <!-- [> main container <] -->
+    <!-- <section class="section"> -->
+    <div class="container">
+        <!-- <p class="title is-3 mt-5 has-text-centered"> Perceptual Quality </p>
+        <p class="content is-size-6 has-text-justified">
+        CLIP-based Quantitative comparison of generated scenes from images generated by Stable Diffusion. We
+        quantitatively compare the results using CLIP-Score and CLIP-
+        IQA with RGBD2. For CLIP-IQA, we use quality, colorful, and sharp criteria. LucidDreamer shows dominating results on all metrics.
+        </p>
+        <p>
+        \[
+        \begin{array}{|c|cccc|cccc|cccc|}
+        \hline
+        \text{Models} & \text{CLIP-Score} \uparrow & \text{CLIP-IQA Quality} \uparrow & \text{CLIP-IQA Colorful} \uparrow & \text{CLIP-IQA Sharp} \uparrow \\
+        \hline
+        \text{RGBD2} & 0.2035 & 0.1279 & 0.2081 & 0.0126 \\
+        \textbf{LucidDreamer} & \textbf{0.2110} & \textbf{0.6161} & \textbf{0.8453} & \textbf{0.5356} \\
+        \hline
+        \end{array}
+        \]
+        </p>
+        <br/> -->
+
+
+        <p class="title is-3 mt-5 has-text-centered"> Additional Experiment: Precise Depth </p>
+        <p class="content is-size-6 has-text-centered">
+            <b>Example results utilizing pseudo-GT depth (oracle).</b>
+            <!-- Precise depth facilitates high-quality 3D reconstruction, even with a limited number of images.  -->
+            We confirm that the geometric cues provided by depth become significantly beneficial for the reconstruction in Gaussian splatting, especially when the number of images is limited.
+            This fact is reaffirmed by the remarkably high performance of the oracle, which employs accurate geometry.
+            <!-- Fine details are perceptible in both RGB and depth. -->
+        </p>
+        <img src="image/oracle.jpg", alt="Algorithm description of LucidDreamer", width="100%", height="100%"> </img>
+        <!-- <div class="hero-body">
+            <div class="container">
+              <div id="results-carousel1" class="carousel results-carousel">
+                    <div class="item">
+                            <div class="video">
+                            <video poster="" id="fantasy_back" autoplay controls muted loop playsinline width="24.5%">
+                                <source src="./video/method1_fern_2shot.mp4" type="video/mp4">
+                            </video>
+                            </div>
+                            <div class="video">
+                            <video poster="" id="fantasy_back" autoplay controls muted loop playsinline width="24.5%">
+                                <source src="./video/method1_fern_2shot.mp4" type="video/mp4">
+                            </video>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <img src="image/fig3.png", alt="Intermeidate prompting for diverse control of scene genreation", width="100%", height="100%"> </img>
+        <p class="content has-text-centered is-size-5">
+        LucidDreamer can accept a sequence of text prompts for scene generation, enabling fine-grained controls.
+        </p>
+
+        <p class="title is-3 mt-5 has-text-centered"> Perceptual Quality </p>
+        <img src="image/fig4.png", alt="Perceptual quality comparison", width="100%", height="100%"> </img>
+        
+        <p class="content is-size-6 has-text-justified">
+        CLIP-based Quantitative comparison of generated scenes from images generated by Stable Diffusion. We
+        quantitatively compare the results using CLIP-Score and CLIP-
+        IQA with RGBD2. For CLIP-IQA, we use quality, colorful, and sharp criteria. LucidDreamer shows dominating results on all metrics.
+        </p>
+        <p>
+        \[
+        \begin{array}{c|c|ccc}
+        \hline
+        \text{Models} & \text{CLIP-Score} \uparrow & \text{CLIP-IQA Quality} \uparrow & \text{CLIP-IQA Colorful} \uparrow & \text{CLIP-IQA Sharp} \uparrow \\
+        \hline
+        \text{RGBD2} & 0.2035 & 0.1279 & 0.2081 & 0.0126 \\
+        \textbf{LucidDreamer} & \textbf{0.2110} & \textbf{0.6161} & \textbf{0.8453} & \textbf{0.5356} \\
+        \hline
+        \end{array}
+        \]
+        </p>
+
+        <p class="title is-3 mt-5 has-text-centered"> Reconstruction Quality </p>
+        <p class="content is-size-6 has-text-justified">
+        Reconstruction metrics of Gaussian splats according to the source of initial SfM points. We use the initial point cloud generated by
+        COLMAP and compare the reconstruction results. Using our point cloud consistently shows better reconstruction metrics.
+        </p>
+        <p>
+        \[
+        \begin{array}{c|c|ccc}
+        \hline
+        \text{Iters} & \text{Source of SfM points} & \text{PSNR} \uparrow & \text{SSIM} \uparrow & \text{LPIPS} \downarrow \\
+        \hline
+        1000 & \text{COLMAP} & 23.15 & 0.7246 & 0.2910 \\
+        & \textbf{LucidDreamer} & \textbf{32.59} & \textbf{0.9672} & \textbf{0.0272} \\
+        \hline
+        3000 & \text{COLMAP} & 30.87 & 0.9478 & 0.0353 \\
+        & \textbf{LucidDreamer} & \textbf{33.80} & \textbf{0.9754} & \textbf{0.0178} \\
+        \hline
+        7000 & \text{COLMAP} & 32.52 & 0.9687 & 0.0208 \\
+        & \textbf{LucidDreamer} & \textbf{34.24} & \textbf{0.9781} & \textbf{0.0164} \\
+        \hline
+        \end{array}
+        \]
+        </p> -->
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container has-text-centered">
+        <div class="card mt-4">
+        <header class="card-header">
+            <p class="card-header-title"> Citation </p>
+        </header>
+        <div class="card-content is-size-5 has-text-left">
+            <pre><code>@article{chung2023depth,
+                title={Depth-Regularized Optimization for 3D Gaussian Splatting in Few-Shot Images},
+                author={Chung, Jaeyoung and Oh, Jeongtaek and Lee, Kyoung Mu},
+                journal={arXiv preprint arXiv:2311.13398},
+                year={2023}
+            }</code></pre>
+        </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+          We thank <a href=https://nerfies.github.io/> Nerfies </a> for their sharing of this nice template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
