@@ -39,7 +39,7 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <p align="left">
             <font size="2">
-              Last updated: Apr. 2024
+              Last updated: Dec. 2024
             </font>
           </p>
           <tr style="padding:0px">
@@ -82,6 +82,53 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
           <!---->
+          <tr onmouseout="OmniSplat_stop()" onmouseover="OmniSplat_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='OmniSplat_image'><video  width="160" height="160" muted autoplay loop>
+                <source src=".mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video></div>
+                <img src='imgs/workinprogress.jpg' width="160" height="160">
+              </div>
+              <script type="text/javascript">
+                function OmniSplat_start() {
+                  document.getElementById('OmniSplat_image').style.opacity = "1";
+                }
+
+                function OmniSplat_stop() {
+                  document.getElementById('OmniSplat_image').style.opacity = "0";
+                }
+                OmniSplat_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <!-- <a href="ODGS/index.html"> -->
+              <papertitle>OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities</papertitle>
+              <!-- </a> -->
+              <br>
+              <a href="https://esw0116.github.io/">Suyoung Lee*</a>,
+              <strong>Jaeyoung Chung*</strong>,
+              Kihoon Kim,
+              Jaeyoo Huh,
+              Gunhee Lee, 
+              Minsoo Lee,
+              <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>,
+              <br>
+              <em>Under review</em>
+              <!-- <br>
+              <a href="">project page</a>
+              /
+              <a href="">arXiv</a>
+              /
+              <a href="">paper</a>
+              /
+              <a href="">code</a> -->
+              <p></p>
+              <p>We propose a method to construct a holistic 3D Gaussian splatting scene using a feed-forward network by taming the pretrained network to align with the Yin-Yang grid.</p>
+            </td>
+          </tr>
+          <!---->
           <tr onmouseout="ODGS_stop()" onmouseover="ODGS_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
@@ -103,24 +150,24 @@
               </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="ODGS/index.html">
-                <papertitle>ODGS: 3D Scene Reconstruction from Omnidirectional Images with 3D Gaussian Splattings</papertitle>
-              </a>
+              <!-- <a href="ODGS/index.html"> -->
+              <papertitle>ODGS: 3D Scene Reconstruction from Omnidirectional Images with 3D Gaussian Splattings</papertitle>
+              <!-- </a> -->
               <br>
-              <a href="https://scholar.google.com/citations?user=s0uhy1gAAAAJ&hl=ko">Suyoung Lee*</a>,
+              <a href="https://esw0116.github.io/">Suyoung Lee*</a>,
               <strong>Jaeyoung Chung*</strong>,
-              <a href="">Jaeyoo Huh</a>,
+              Jaeyoo Huh,
               <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>,
               <br>
               <em>Conference and Workshop on Neural Information Processing Systems (NeurIPS) 2024</em>
-              <br>
-              <a href="">project page</a>
+              <!-- <br>
+              <a href="">project page</a> -->
               /
-              <a href="">arXiv</a>
+              <a href="https://arxiv.org/abs/2410.20686">arXiv</a>
               /
-              <a href="">paper</a>
+              <a href="https://neurips.cc/virtual/2024/poster/96122">paper</a>
               /
-              <a href="">code</a>
+              <a href="https://github.com/esw0116/ODGS">code</a>
               <!--
               /
               <a href="https://youtu.be/YStDS2-Ln1s">video</a>
@@ -128,40 +175,39 @@
               <p></p>
               <p>We introduce a method to optimize Gaussian splatting with 360 panorama images, considering omnidirectional camera model.</p>
             </td>
-          </tr> 
+          </tr>
           <!---->
-          <!--
-          <tr onmouseout="RTHumanNeRF_stop()" onmouseover="RTHumanNeRF_start()">
+          <!-- <tr onmouseout="DeblurGS_stop()" onmouseover="DeblurGS_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
-                <div class="two" id='RTHumanNeRF_image'><video  width=100% height=100% muted autoplay loop>
-                <source src="imgs/humanNeRF_male3.mp4" type="video/mp4">
+                <div class="two" id='DeblurGS_image'><video  width="160" height="160" muted autoplay loop>
+                <source src=".mp4" type="video/mp4">
                 Your browser does not support the video tag.
                 </video></div>
-                <img src='imgs/humanNeRF_male3.png' width="160">
+                <img src='imgs/workinprogress.jpg' width="160" height="160">
               </div>
               <script type="text/javascript">
-                function RTHumanNeRF_start() {
-                  document.getElementById('RTHumanNeRF_image').style.opacity = "1";
+                function DeblurGS_start() {
+                  document.getElementById('DeblurGS_image').style.opacity = "1";
                 }
 
-                function RTHumanNeRF_stop() {
-                  document.getElementById('RTHumanNeRF_image').style.opacity = "0";
+                function DeblurGS_stop() {
+                  document.getElementById('DeblurGS_image').style.opacity = "0";
                 }
-                RTHumanNeRF_stop()
+                DeblurGS_stop()
               </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
-              <papertitle> Real-time Human NeRF</papertitle>
+              <papertitle>DeblurGS: Gaussian Splatting for Camera Motion Blur</papertitle>
               <br>
+              Jeongtaek Oh, 
               <strong>Jaeyoung Chung</strong>, 
-              Chunyu Wang, 
-              Kyoung Mu Lee
+              Dongwoo Lee,
+              <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>,
               <br>
-              <em>Working on</em>
-              <br>
+              <a href="https://arxiv.org/abs/2404.11358">arXiv</a>
               <p></p>
-              <p>Real-time framework on NeRF-based dynamic human body</p>
+              <p>We optimizes sharp 3D Gaussian Splatting from motion-blurred images by estimating 6-DoF camera motion, synthesizing blurry renderings for optimization, and using Gaussian Densification Annealing to handle noisy camera poses.</p>
             </td>
           </tr> -->
           <!---->
@@ -193,7 +239,7 @@
               </a>
               <br>
               <strong>Jaeyoung Chung*</strong>,
-              <a href="https://scholar.google.com/citations?user=s0uhy1gAAAAJ&hl=ko">Suyoung Lee*</a>,
+              <a href="https://esw0116.github.io/">Suyoung Lee*</a>,
               <a href="https://hygenie1228.github.io/">Hyeongjin Nam</a>,
               <a href="https://jaerinlee.com/">Jaerin Lee</a>,
               <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>,
