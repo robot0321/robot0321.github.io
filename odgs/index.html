@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities">
-  <meta name="keywords" content="OmniSplat, Scene, 360, Omnidirectional, 3D Gaussian Splatting, Panoramic">
+        content="ODGS: 3D Scene Reconstruction from Omnidirectional Images with 3D Gaussian Splatting">
+  <meta name="keywords" content="ODGS, Scene, 360, Omnidirectional, 3DGS, 3D Gaussian Splatting, Panoramic">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities</title>
+  <title>ODGS: 3D Scene Reconstruction from Omnidirectional Images with 3D Gaussian Splatting</title>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPKZS1H0X8"></script>
@@ -225,47 +225,30 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <!-- <h1 class="title is-2 publication-title">OmniSplat:</h1> -->
-          <h2 class="title is-3 publication-title">OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities</h2>
+          <h1 class="title is-2 publication-title">ODGS: 3D Scene Reconstruction from Omnidirectional Images with 3D Gaussian Splatting</h1>
             <style>
               .author-block {
                   margin-right: 10px;
               }
             </style>
-            <div class="is-size-6 publication-authors">
+            <div class="is-size-5 publication-authors">
               <span class="author-block">
                 <a href="https://esw0116.github.io/">Suyoung Lee</a><sup>1*</sup>,</span>
               <span class="author-block">
                 <a href="https://robot0321.github.io/">Jaeyoung Chung</a><sup>1*</sup>,</span>
               <span class="author-block"> 
-                Kihoon Kim<sup>2</sup>,</span>
-              <span class="author-block"> 
                 Jaeyoo Huh<sup>2</sup>,</span>
-              <span class="author-block"> 
-                Gunhee Lee<sup>3</sup>,</span>
-              <span class="author-block">
-                Minsoo Lee<sup>3</sup>,</span>
               <span class="author-block"> 
                 <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a><sup>1,2</sup>,</span>
             </div>
 
-          <!-- <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of California, Los Angeles</span>
-          </div>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>2</sup>University of Texas at Austin</span>
-          </div>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>3</sup>DEVCOM Army Research Laboratory</span>
-          </div> -->
           <style>
             .univerity-block {
                 margin-right: 14px;
             }
           </style>
-          <div class="is-size-6 publication-authors">
+          <div class="is-size-5 publication-authors">
             <span class="univerity-block"><sup>1</sup>Dept. of ECE & ASRI, <sup>2</sup>IPAI, Seoul National University, Seoul, Korea</span>
-            <span class="univerity-block"><sup>3</sup>LG AI Research</span>
           </div>
 
           <!-- <div class="is-size-6 publication-authors">
@@ -280,7 +263,7 @@
             <div class="publication-links">
               <!-- Paper PDF Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://neurips.cc/virtual/2024/poster/96122"
                     class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -290,7 +273,7 @@
               </span>
               <!-- ArXiv PDF Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2410.20686"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -298,19 +281,26 @@
                   <span>ArXiv</span>
                 </a>
               </span>
-              <!-- Video Link. -->
-              <!-- <span class="link-block">
-                <a href="https://www.youtube.com/embed/6rMIQfe7b24?si=cm7cZ-T9r5na7YFD"
+              <span class="link-block">
+                <a href="imgs/odgs_poster.jpg"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="fab fa-youtube"></i>
+                      <i class="fa-solid fa-file-pdf"></i>
                   </span>
-                  <span>Video</span>
+                  <span>Poster</span>
                 </a>
-              </span> -->
-              <!-- Code Link. -->
+              </span>
               <span class="link-block">
-                <a href=""
+                <a href="imgs/odgs_slides.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fa-solid fa-file-pdf"></i>
+                  </span>
+                  <span>Slides</span>
+                </a>
+              </span>              
+              <span class="link-block">
+                <a href="https://github.com/esw0116/ODGS"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -323,33 +313,10 @@
           </div>
         </div>
       </div>
-    <!-- </div>
-  </div>
-</section> -->
-<!-- <section class="hero teaser">
-  <div class="container_teaser is-max-desktop">
-    <div class="column_teaser">
-      <div class="columns is-centered">
-        <figure class="image is-centered">
-          <img src="./media/dreamscene360_teaser.gif" alt="teaser gif">
-        </figure>
-      </div>
-        <div class="content has-text-justified">
-        We introduce a 3D scene generation pipeline that creates immersive, 
-        high-quality scenes with complete 360$^{\circ}$ coverage from text prompts of any level of specificity, 
-        leveraging GPT-4V with 2D diffusion model and panoramic Gaussian splatting to achieve exceptional content 
-        quality and rendering speed.
-      </div>
-    </div>
-</div>
-</section> -->
 
-<!-- <section class="section">
-  <div class="container is-max-desktop"> -->
       <div class="content has-text-justified">
         <p>
-          <b>TL;DR.</b> A Transformer estimating 3D Gaussian splatting from two 360 panorama (or omnidirectional) images, 
-          utilizing the quasi-uniform and structured grid (Yin-Yang grid) for stable attention.
+          <b>TL;DR.</b> Designing 3DGS rasterizer for omnidirectional image, implemented in CUDA, verifed mathematically.
           <br> <br>
         </p>
 
@@ -359,12 +326,12 @@
           </figure>
         </div>
         <p>
-          <b>The overall process of OmniSplat.</b>
-          The two reference omnidirectional images are decomposed into Yin-Yang images, and the cross-view attention is conducted across grids along with epipolar lines to compose cost volume.
-          The 3DGS parameters are estimated and Yin-Yang images are rasterized from the novel view.
-          The two images are combined to synthesize the final omnidirectional image.
-          In cross-view attention, we present red and yellow points and the corresponding sphere sweep curves with the same color. 
-          Each image performs cross-attention to the Yin-Yang images from other views, following geometric constraints.
+          <b></b>Illustration on rasterization process of ODGS.</b>
+          We describe the process of projecting a 3D Gaussian to the omnidirectional pixel space.
+          (a) Transforming the coordinate from the <font color=black>original</font> to <font color=green>target</font>.
+          (b) Projecting Gaussians onto the tangent plane.
+          (c) Compensating equirectangular space stretch.
+          (d) Scaling to pixel space and blending with other Gaussians.
           <br> <br>
         </p>
       </div>
@@ -385,14 +352,19 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Feed-forward 3D Gaussian Splatting (3DGS) models have gained significant popularity due to their ability to generate scenes immediately without needing per-scene optimization.
-            Although omnidirectional images are getting more popular since they reduce the computation for image stitching to composite a holistic scene, existing feed-forward models are only designed for perspective images.
-            The unique optical properties of omnidirectional images make it difficult for feature encoders to correctly understand the context of the image, and make the Gaussian non-uniform in space, which hinders the image quality synthesized from novel views.
-            We propose OmniSplat, a pioneering work for fast feed-forward 3DGS generation from a few omnidirectional images.
-            We introduce Yin-Yang grid and decompose images based on it to reduce the domain gap between omnidirectional and perspective images.
-            The Yin-Yang grid can use the existing CNN structure as it is, but its quasi-uniform characteristic allows the decomposed image to be similar to a perspective image, so it can exploit the strong prior knowledge of the learned feed-forward network.
-            OmniSplat demonstrates higher reconstruction accuracy than existing feed-forward networks trained on perspective images.
-            Furthermore, we enhance the segmentation consistency between omnidirectional images by leveraging attention from the encoder of OmniSplat, providing fast and clean 3DGS editing results.
+            Omnidirectional (or 360-degree) images are increasingly being used for 3D applications since they allow the rendering of an entire scene with a single image. 
+            Existing works based on neural radiance fields demonstrate successful 3D reconstruction quality on egocentric videos, yet they suffer from long training and rendering times. 
+            Recently, 3D Gaussian splatting has gained attention for its fast optimization and real-time rendering. 
+            However, directly using a perspective rasterizer to omnidirectional images results in severe distortion due to the different optical properties between two image domains.
+            In this work, we present ODGS, a novel rasterization pipeline for omnidirectional images, with geometric interpretation. 
+            For each Gaussian, we define a tangent plane that touches the unit sphere and is perpendicular to the ray headed toward the Gaussian center. 
+            We then leverage a perspective camera rasterizer to project the Gaussian onto the corresponding tangent plane. 
+            The projected Gaussians are transformed and combined into the omnidirectional image, finalizing the omnidirectional rasterization process. 
+            This interpretation reveals the implicit assumptions within the proposed pipeline, which we verify through mathematical proofs.
+            The entire rasterization process is parallelized using CUDA, achieving optimization and rendering speeds 100 times faster than NeRF-based methods. 
+            Our comprehensive experiments highlight the superiority of ODGS by delivering the best reconstruction and perceptual quality across various datasets.
+            Additionally, results on roaming datasets demonstrate that ODGS restores fine details effectively, even when reconstructing large 3D scenes. 
+            The source code is available on our project page.
           </p>
         </div>
       </div>
@@ -404,18 +376,25 @@
     <div class="columns is-centered">
       <div class="column">
         <figure class="image is-centered">
-          <img src="./imgs/qual.png" alt="indoor compare">
+          <img src="./imgs/odgs_qual1.jpg" alt="indoor compare">
         </figure>
       </div>
     </div>
     <div class="columns is-centered">
+      <div class="column">
+        <figure class="image is-centered">
+          <img src="./imgs/odgs_qual2.jpg" alt="indoor compare">
+        </figure>
+      </div>
+    </div>
+    <!-- <div class="columns is-centered">
       <div class="column">
         <video id="matting-video" autoplay controls muted loop playsinline height="100%">
           <source src="./imgs/qualvideo720.mp4"
           type="video/mp4">
         </video>
       </div>
-    </div>
+    </div> -->
     <style>
       .before,
       .after {
@@ -443,148 +422,14 @@
     </style>
   </div>
 </section>
-<!-- Image and Depth GIF -->
-<!-- <style>
-  #results-carousel {
-      width: 80%; 
-      max-width: 1200px; 
-      margin: auto; 
-      overflow-x: hidden; 
-      overflow-y: hidden; 
-  }
-</style>
-<section class="section">
-  <div class="container is-max-desktop">
-    <h3 class="title is-3">Real 3D with Diverse Style and High-quality Geometry</h3>
-    <div class="content has-text-justified">
-    <p>
-      Our generated 3D scenes are diverse in style, consistent in geometry, and highly matched with the simple text inputs. <br> 
-    </p>
-    </div>
-    <div class="columns is-centered">
-      <div class="column">
-        <div>
-          <div id="results-carousel" class="carousel results-carousel">
-      
-            <div class="column">
-              <div>
-                <img-comparison-slider>
-                  <figure slot="first" class="before">
-                    <img width="100%" src="./media/outdoor_render.gif">
-                  </figure>
-                  <figure slot="second" class="after">
-                    <img width="100%" src="./media/outdoor_depth.gif">
-                    
-                </img-comparison-slider>
-              </div>
-              <h4 class="title is-6"> A backyard in a sunny day</h4>
-            </div>
-            
-    
-            <div class="column">
-              <div>
-                <img-comparison-slider>
-                  <figure slot="first" class="before">
-                    <img width="100%" src="./media/indoor_render.gif">
-                  </figure>
-                  <figure slot="second" class="after">
-                    <img width="100%" src="./media/indoor_depth.gif">
-                </img-comparison-slider>
-              </div>
-              <h4 class="title is-6"> A cozy living room</h4>
-            </div>
-            
-            <div class="column">
-              <div>
-                <img-comparison-slider>
-                  <figure slot="first" class="before">
-                    <img width="100%" src="./media/cyberpunk_render.gif">
-                  </figure>
-                  <figure slot="second" class="after">
-                    <img width="100%" src="./media/cyberpunk_depth.gif">
-                </img-comparison-slider>
-              </div>
-              <h4 class="title is-6"> A cyberpunk city in the future</h4>
-            </div>
-    
-            <div class="column">
-              <div>
-                <img-comparison-slider>
-                  <figure slot="first" class="before">
-                    <img width="100%" src="./media/anime_render.gif">
-                  </figure>
-                  <figure slot="second" class="after">
-                    <img width="100%" src="./media/anime_depth.gif">
-                </img-comparison-slider>
-              </div>
-              <h4 class="title is-6"> An anime style Japanese city street</h4>
-            </div>
-    
-            <div class="column">
-              <div>
-                <img-comparison-slider>
-                  <figure slot="first" class="before">
-                    <img width="100%" src="./media/egarden_render.gif">
-                  </figure>
-                  <figure slot="second" class="after">
-                    <img width="100%" src="./media/egarden_depth.gif">
-                </img-comparison-slider>
-              </div>
-              <h4 class="title is-6"> English garden</h4>
-            </div>
-    
-            <div class="column">
-              <div>
-                <img-comparison-slider>
-                  <figure slot="first" class="before">
-                    <img width="100%" src="./media/bank_render.gif">
-                  </figure>
-                  <figure slot="second" class="after">
-                    <img width="100%" src="./media/bank_depth.gif">
-                </img-comparison-slider>
-              </div>
-              <h4 class="title is-6"> River bank with a sidewalk and buildings</h4>
-            </div>
-    
-            <div class="column">
-            <div>
-              <img-comparison-slider>
-                <figure slot="first" class="before">
-                  <img width="100%" src="./media/classroom_render.gif">
-                </figure>
-                <figure slot="second" class="after">
-                  <img width="100%" src="./media/classroom_depth.gif">
-              </img-comparison-slider>
-            </div>
-            <h4 class="title is-6"> A classroom</h4>
-          </div>
-    
-            <div class="column">
-            <div>
-              <img-comparison-slider>
-                <figure slot="first" class="before">
-                  <img width="100%" src="./media/campus_render.gif">
-                </figure>
-                <figure slot="second" class="after">
-                  <img width="100%" src="./media/campus_depth.gif">
-              </img-comparison-slider>
-            </div>
-            <h4 class="title is-6"> Painting of college campus</h4>
-          </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-</section> -->
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{lee2024omnisplat,
-      title={OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities},
-      author={Suyoung Lee, Jaeyoung Chung, Kihoon Kim, Jaeyoo Huh, Gunhee Lee, Minsoo Lee, Kyoung Mu Lee},
-      journal={arXiv preprint arXiv:2412.00000},
+    <pre><code>@article{lee2024odgs,
+      title={ODGS: 3D Scene Reconstruction from Omnidirectional Images with 3D Gaussian Splattings},
+      author={Lee, Suyoung and Chung, Jaeyoung and Huh, Jaeyoo and Lee, Kyoung Mu},
+      journal={arXiv preprint arXiv:2410.20686},
       year={2024}
 }</code></pre>
   </div>
