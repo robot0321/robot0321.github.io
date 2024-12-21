@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities">
+  <meta name="keywords" content="OmniSplat, Scene, 360, 3DGS, 3D Gaussian Splatting, Panoramic">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPKZS1H0X8"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VPKZS1H0X8');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/index.js"></script>
+
+  <!-- custom additional scripts -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"
+  />
+
+  <!-- swiper -->
+  <!-- https://swiperjs.com/demos -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <link rel="image_src" href="./media/pipeline.png">
+  
+  <!-- img comparison slider -->
+  <!-- https://github.com/sneas/img-comparison-slider -->
+  <style>
+    .before,
+    .after {
+      margin: 0;
+    }
+    .before figcaption,
+    .after figcaption {
+      background: #fff;
+      border: 1px solid #c0c0c0;
+      border-radius: 4px;
+      color: #2e3452;
+      opacity: 0.8;
+      padding: 4px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 70%;
+    }
+    .before figcaption {
+      left: 4px;
+    }
+    .after figcaption {
+      right: 4px;
+    }
+  </style>
+
+  <style>
+    .button-container_teaser {
+        display: flex;       
+        justify-content: center; 
+        align-items: center;
+    }
+    .glow-button {
+        position: relative;
+        display: inline-block;
+        padding: 2px;
+        border-radius: 10px;
+        z-index: 0;
+        margin-bottom: 15px;
+    }
+    .glow-button button {
+        background: transparent; 
+        border: none; 
+        color: white; 
+        padding: 5px 10px; 
+        font-size: 16px; 
+        border-radius: 10px; 
+        cursor: pointer; 
+        outline: none; 
+    }
+    .glow-button:before {
+        content: "";
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing-button-85 20s linear infinite;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 10px;
+    }
+    @keyframes glowing-button-85 {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+    }
+    .glow-button:after {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #222;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+    }
+  </style>
+
+  <style>
+    .container_teaser {
+        display: flex; /* Enables Flexbox */
+        justify-content: center; /* Horizontally centers the content */
+        align-items: center; /* Vertically centers the content */
+        height: 100%; /* Set the height of the container */
+    }
+    .column_teaser {
+        flex: 0 0 auto; /* This ensures that the column doesn't grow or shrink */
+        width: 100%; /* Adjust this width as needed */
+        max-width: 800px; /* Adjust this max-width as needed */
+        margin: 0 auto; /* Centers the column within the container */
+    }
+  </style>
+  <script
+    defer
+    src="./js/image-comparison-slider.js"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="./css/image-comparison-slider.css"
+  />
+
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <!-- <h1 class="title is-2 publication-title">OmniSplat:</h1> -->
+          <h2 class="title is-3 publication-title">OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities</h2>
+            <style>
+              .author-block {
+                  margin-right: 10px;
+              }
+            </style>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">
+                <a href="https://esw0116.github.io/">Suyoung Lee</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="https://robot0321.github.io/">Jaeyoung Chung</a><sup>1*</sup>,</span>
+              <span class="author-block"> 
+                Kihoon Kim<sup>2</sup>,</span>
+              <span class="author-block"> 
+                Jaeyoo Huh<sup>2</sup>,</span>
+              <span class="author-block"> 
+                Gunhee Lee<sup>3</sup>,</span>
+              <span class="author-block">
+                Minsoo Lee<sup>3</sup>,</span>
+              <span class="author-block"> 
+                <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a><sup>1,2</sup>,</span>
+            </div>
+
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of California, Los Angeles</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>2</sup>University of Texas at Austin</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>3</sup>DEVCOM Army Research Laboratory</span>
+          </div> -->
+          <style>
+            .univerity-block {
+                margin-right: 14px;
+            }
+          </style>
+          <div class="is-size-6 publication-authors">
+            <span class="univerity-block"><sup>1</sup>ECE, ASRI, Seoul National University</span>
+            <span class="univerity-block"><sup>2</sup>IPAI, Seoul National University</span>
+            <span class="univerity-block"><sup>3</sup>LG AI Research</span>
+          </div>
+
+          <!-- <div class="is-size-6 publication-authors">
+            <span class="author-block">*Denotes Equal Contribution</span>
+          </div> -->
+
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="univerity-block" style="color: rgb(169, 16, 151);">ECCV 2024, Milan</span>
+          </div> -->
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Paper PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- ArXiv PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>ArXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/embed/6rMIQfe7b24?si=cm7cZ-T9r5na7YFD"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <!-- </div>
+  </div>
+</section> -->
+<!-- <section class="hero teaser">
+  <div class="container_teaser is-max-desktop">
+    <div class="column_teaser">
+      <div class="columns is-centered">
+        <figure class="image is-centered">
+          <img src="./media/dreamscene360_teaser.gif" alt="teaser gif">
+        </figure>
+      </div>
+        <div class="content has-text-justified">
+        We introduce a 3D scene generation pipeline that creates immersive, 
+        high-quality scenes with complete 360$^{\circ}$ coverage from text prompts of any level of specificity, 
+        leveraging GPT-4V with 2D diffusion model and panoramic Gaussian splatting to achieve exceptional content 
+        quality and rendering speed.
+      </div>
+    </div>
+</div>
+</section> -->
+
+<!-- <section class="section">
+  <div class="container is-max-desktop"> -->
+      <div class="content has-text-justified">
+        <p>
+          <b>TL;DR.</b> A Transformer estimating 3D Gaussian splatting from two 360 panorama (or omnidirectional) images, 
+          utilizing the quasi-uniform and structured grid (Yin-Yang grid) for stable attention.
+          <br> <br>
+        </p>
+
+        <div class="columns is-centered">
+          <figure class="image is-centered">
+            <img src="./imgs/method.jpg" alt="method">
+          </figure>
+        </div>
+        <p>
+          <b>The overall process of OmniSplat.</b>
+          The two reference omnidirectional images are decomposed into Yin-Yang images, and the cross-view attention is conducted across grids along with epipolar lines to compose cost volume.
+          The 3DGS parameters are estimated and Yin-Yang images are rasterized from the novel view.
+          The two images are combined to synthesize the final omnidirectional image.
+          In cross-view attention, we present red and yellow points and the corresponding sphere sweep curves with the same color. 
+          Each image performs cross-attention to the Yin-Yang images from other views, following geometric constraints.
+          <br> <br>
+        </p>
+      </div>
+
+
+  <!-- </div>
+</section> -->
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Feed-forward 3D Gaussian Splatting (3DGS) models have gained significant popularity due to their ability to generate scenes immediately without needing per-scene optimization.
+            Although omnidirectional images are getting more popular since they reduce the computation for image stitching to composite a holistic scene, existing feed-forward models are only designed for perspective images.
+            The unique optical properties of omnidirectional images make it difficult for feature encoders to correctly understand the context of the image, and make the Gaussian non-uniform in space, which hinders the image quality synthesized from novel views.
+            We propose OmniSplat, a pioneering work for fast feed-forward 3DGS generation from a few omnidirectional images.
+            We introduce Yin-Yang grid and decompose images based on it to reduce the domain gap between omnidirectional and perspective images.
+            The Yin-Yang grid can use the existing CNN structure as it is, but its quasi-uniform characteristic allows the decomposed image to be similar to a perspective image, so it can exploit the strong prior knowledge of the learned feed-forward network.
+            OmniSplat demonstrates higher reconstruction accuracy than existing feed-forward networks trained on perspective images.
+            Furthermore, we enhance the segmentation consistency between omnidirectional images by leveraging attention from the encoder of OmniSplat, providing fast and clean 3DGS editing results.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Qualitative Image and Video -->
+    <div class="column has-text-centered">
+      <h3 class="title is-3">Qualitative Results</h3>
+    </div>
+    <div class="columns is-centered">
+      <div class="column">
+        <figure class="image is-centered">
+          <img src="./imgs/qual.png" alt="indoor compare">
+        </figure>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column">
+        <video id="matting-video" autoplay controls muted loop playsinline height="100%">
+          <source src="./imgs/qualvideo720.mp4"
+          type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <style>
+      .before,
+      .after {
+        margin: 0;
+      }
+      .before figcaption,
+      .after figcaption {
+        background: #fff;
+        border: 1px solid #c0c0c0;
+        border-radius: 4px;
+        color: #2e3452;
+        opacity: 0.8;
+        padding: 4px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 100%;
+      }
+      .before figcaption {
+        left: 4px;
+      }
+      .after figcaption {
+        right: 4px;
+      }
+    </style>
+  </div>
+</section>
+<!-- Image and Depth GIF -->
+<!-- <style>
+  #results-carousel {
+      width: 80%; 
+      max-width: 1200px; 
+      margin: auto; 
+      overflow-x: hidden; 
+      overflow-y: hidden; 
+  }
+</style>
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-3">Real 3D with Diverse Style and High-quality Geometry</h3>
+    <div class="content has-text-justified">
+    <p>
+      Our generated 3D scenes are diverse in style, consistent in geometry, and highly matched with the simple text inputs. <br> 
+    </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column">
+        <div>
+          <div id="results-carousel" class="carousel results-carousel">
+      
+            <div class="column">
+              <div>
+                <img-comparison-slider>
+                  <figure slot="first" class="before">
+                    <img width="100%" src="./media/outdoor_render.gif">
+                  </figure>
+                  <figure slot="second" class="after">
+                    <img width="100%" src="./media/outdoor_depth.gif">
+                    
+                </img-comparison-slider>
+              </div>
+              <h4 class="title is-6"> A backyard in a sunny day</h4>
+            </div>
+            
+    
+            <div class="column">
+              <div>
+                <img-comparison-slider>
+                  <figure slot="first" class="before">
+                    <img width="100%" src="./media/indoor_render.gif">
+                  </figure>
+                  <figure slot="second" class="after">
+                    <img width="100%" src="./media/indoor_depth.gif">
+                </img-comparison-slider>
+              </div>
+              <h4 class="title is-6"> A cozy living room</h4>
+            </div>
+            
+            <div class="column">
+              <div>
+                <img-comparison-slider>
+                  <figure slot="first" class="before">
+                    <img width="100%" src="./media/cyberpunk_render.gif">
+                  </figure>
+                  <figure slot="second" class="after">
+                    <img width="100%" src="./media/cyberpunk_depth.gif">
+                </img-comparison-slider>
+              </div>
+              <h4 class="title is-6"> A cyberpunk city in the future</h4>
+            </div>
+    
+            <div class="column">
+              <div>
+                <img-comparison-slider>
+                  <figure slot="first" class="before">
+                    <img width="100%" src="./media/anime_render.gif">
+                  </figure>
+                  <figure slot="second" class="after">
+                    <img width="100%" src="./media/anime_depth.gif">
+                </img-comparison-slider>
+              </div>
+              <h4 class="title is-6"> An anime style Japanese city street</h4>
+            </div>
+    
+            <div class="column">
+              <div>
+                <img-comparison-slider>
+                  <figure slot="first" class="before">
+                    <img width="100%" src="./media/egarden_render.gif">
+                  </figure>
+                  <figure slot="second" class="after">
+                    <img width="100%" src="./media/egarden_depth.gif">
+                </img-comparison-slider>
+              </div>
+              <h4 class="title is-6"> English garden</h4>
+            </div>
+    
+            <div class="column">
+              <div>
+                <img-comparison-slider>
+                  <figure slot="first" class="before">
+                    <img width="100%" src="./media/bank_render.gif">
+                  </figure>
+                  <figure slot="second" class="after">
+                    <img width="100%" src="./media/bank_depth.gif">
+                </img-comparison-slider>
+              </div>
+              <h4 class="title is-6"> River bank with a sidewalk and buildings</h4>
+            </div>
+    
+            <div class="column">
+            <div>
+              <img-comparison-slider>
+                <figure slot="first" class="before">
+                  <img width="100%" src="./media/classroom_render.gif">
+                </figure>
+                <figure slot="second" class="after">
+                  <img width="100%" src="./media/classroom_depth.gif">
+              </img-comparison-slider>
+            </div>
+            <h4 class="title is-6"> A classroom</h4>
+          </div>
+    
+            <div class="column">
+            <div>
+              <img-comparison-slider>
+                <figure slot="first" class="before">
+                  <img width="100%" src="./media/campus_render.gif">
+                </figure>
+                <figure slot="second" class="after">
+                  <img width="100%" src="./media/campus_depth.gif">
+              </img-comparison-slider>
+            </div>
+            <h4 class="title is-6"> Painting of college campus</h4>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+</section> -->
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{lee2024omnisplat,
+      title={OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities},
+      author={Suyoung Lee, Jaeyoung Chung, Kihoon Kim, Jaeyoo Huh, Gunhee Lee, Minsoo Lee, Kyoung Mu Lee},
+      journal={arXiv preprint arXiv:2412.00000},
+      year={2024}
+}</code></pre>
+  </div>
+</section>
+<!-- journal={arXiv preprint arXiv:2410.20686}, -->
+
+<script>
+  function toggleSliders() {
+      // Get both slider containers
+      var slider1 = document.getElementById("slider1-container_teaser");
+      var slider2 = document.getElementById("slider2-container_teaser");
+
+      // Toggle visibility
+      if (slider1.style.display === "none") {
+          slider1.style.display = "block";
+          slider2.style.display = "none";
+      } else {
+          slider1.style.display = "none";
+          slider2.style.display = "block";
+      }
+  }
+</script>
+
+</body>
+</html>
