@@ -155,3 +155,23 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap; /* 줄바꿈 자동 */
+}
+
+.affiliation {
+  flex: 1;
+  min-width: 200px; /* 최소 크기 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.affiliation img {
+  max-width: 100%;
+  height: auto;
+}
