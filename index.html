@@ -41,7 +41,7 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <p align="left">
             <font size="2">
-              Last updated: July 2025
+              Last updated: Nov 2025
             </font>
           </p>
           <tr style="padding:0px">
@@ -87,6 +87,96 @@
         </tbody></table>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
+          <!---->
+          <tr onmouseout="Map2World_stop()" onmouseover="Map2World_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='Map2World_image'><video  width="160" height="160" muted autoplay loop>
+                <source src="imgs/Map2World.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video></div>
+                <img src='imgs/Map2World.png' width="160" height="160">
+              </div>
+              <script type="text/javascript">
+                function Map2World_start() {
+                  document.getElementById('Map2World_image').style.opacity = "1";
+                }
+
+                function Map2World_stop() {
+                  document.getElementById('Map2World_image').style.opacity = "0";
+                }
+                Map2World_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <!-- <a href="ODGS/index.html"> -->
+              <papertitle>Map2World: Segment Map Conditioned Text to 3D World Generation</papertitle>
+              <!-- </a> -->
+              <br>
+              <strong>Jaeyoung Chung*</strong>,
+              <a href="https://esw0116.github.io/">Suyoung Lee*</a>,
+              <a href="https://jeffreyxiang.github.io/">Jianfeng Xiang</a>,
+              <a href="https://jlyang.org/">Jiaolong Yang</a>,
+              <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>
+              <!-- <br>
+              <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR),</em> 2025 -->
+              <br>
+              Project page
+              /
+              Paper
+              /
+              ArXiv
+              /
+              Code
+              <p></p>
+              <p>Map2World expands arbitrary segment maps into coherent 3D worlds and enhances them with fine details, leveraging strong priors of a 3D asset generative model.</p>
+            </td>
+          </tr>
+          <!---->
+          <tr onmouseout="GenerativePhotomosaic_stop()" onmouseover="GenerativePhotomosaic_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='GenerativePhotomosaic_image'>
+                  <video  width="160" height="160" muted autoplay loop>
+                    <source src="imgs/GenerativePhotomosaic.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <img src='imgs/GenerativePhotomosaic.png' width="160" height="160">
+              </div>
+              <script type="text/javascript">
+                function GenerativePhotomosaic_start() {
+                  document.getElementById('GenerativePhotomosaic_image').style.opacity = "1";
+                }
+
+                function GenerativePhotomosaic_stop() {
+                  document.getElementById('GenerativePhotomosaic_image').style.opacity = "0";
+                }
+                GenerativePhotomosaic_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <!-- <a href="ODGS/index.html"> -->
+              <papertitle>From Matching to Generation: Generative Photomosaics with Structure-Aligned and Personalized Diffusion</papertitle>
+              <!-- </a> -->
+              <br>
+              <strong>Jaeyoung Chung*</strong>,
+              Hyunjin Son*,
+              <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>
+              <br>
+              <!-- <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR),</em> 2025 -->
+              <!-- <br> -->
+              Project page
+              /
+              Paper
+              /
+              ArXiv
+              /
+              Code
+              <p></p>
+              <p>A generative photomosaic framework that synthesizes structure-aligned mosaics and supports few-shot personalized creation.</p>
+            </td>
+          </tr>
           <!---->
           <tr onmouseout="OmniSplat_stop()" onmouseover="OmniSplat_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
