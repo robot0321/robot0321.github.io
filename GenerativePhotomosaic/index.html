@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Generative Photomosaic">
+  <meta name="keywords" content="Generative model, photomosaic, Stable Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Generative Photomosaic</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPKZS1H0X8"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VPKZS1H0X8');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/index.js"></script>
+
+  <!-- custom additional scripts -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"
+  />
+
+  <!-- swiper -->
+  <!-- https://swiperjs.com/demos -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <link rel="image_src" href="./media/pipeline.png">
+  
+  <!-- img comparison slider -->
+  <!-- https://github.com/sneas/img-comparison-slider -->
+  <style>
+    .before,
+    .after {
+      margin: 0;
+    }
+    .before figcaption,
+    .after figcaption {
+      background: #fff;
+      border: 1px solid #c0c0c0;
+      border-radius: 4px;
+      color: #2e3452;
+      opacity: 0.8;
+      padding: 4px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 70%;
+    }
+    .before figcaption {
+      left: 4px;
+    }
+    .after figcaption {
+      right: 4px;
+    }
+  </style>
+
+  <style>
+    .button-container_teaser {
+        display: flex;       
+        justify-content: center; 
+        align-items: center;
+    }
+    .glow-button {
+        position: relative;
+        display: inline-block;
+        padding: 2px;
+        border-radius: 10px;
+        z-index: 0;
+        margin-bottom: 15px;
+    }
+    .glow-button button {
+        background: transparent; 
+        border: none; 
+        color: white; 
+        padding: 5px 10px; 
+        font-size: 16px; 
+        border-radius: 10px; 
+        cursor: pointer; 
+        outline: none; 
+    }
+    .glow-button:before {
+        content: "";
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing-button-85 20s linear infinite;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 10px;
+    }
+    @keyframes glowing-button-85 {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+    }
+    .glow-button:after {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #222;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+    }
+  </style>
+  <style>
+    .comic-font {
+      font-family: "Comic Sans MS", "Comic Neue", cursive;
+      letter-spacing: 0.5px;
+    }
+  </style>
+  <style>
+    .container_teaser {
+        display: flex; /* Enables Flexbox */
+        justify-content: center; /* Horizontally centers the content */
+        align-items: center; /* Vertically centers the content */
+        height: 100%; /* Set the height of the container */
+    }
+    .column_teaser {
+        flex: 0 0 auto; /* This ensures that the column doesn't grow or shrink */
+        width: 100%; /* Adjust this width as needed */
+        max-width: 800px; /* Adjust this max-width as needed */
+        margin: 0 auto; /* Centers the column within the container */
+    }
+  </style>
+  <script
+    defer
+    src="./js/image-comparison-slider.js"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="./css/image-comparison-slider.css"
+  />
+
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <!-- title -->
+          <p class="title is-2 publication-title">
+            From Matching to Generation: <br><font color="#4A90E2" size="7">Generative Photomosaics</font> with Structure-Aligned and Personalized Diffusion
+          </p>
+
+          <!-- publication -->
+          <!-- <p class="subtitle is-4" style="color: #008080"> <b>CVPR 2025, Highlights</b> </p> -->
+
+            <style>
+              .author-block {
+                  margin-right: 10px;
+              }
+            </style>
+            <div class="is-size-4 publication-authors">
+              <span class="author-block">
+                <a href="https://robot0321.github.io/">Jaeyoung Chung</a><sup>*</sup>,</span>
+              <span class="author-block"> 
+                Hyunjin Son<sup>*</sup>,</span>
+              <span class="author-block"> 
+                <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a><sup></sup>,</span>
+            </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">*Denotes Equal Contribution</span>
+          </div>
+          <br>
+
+          <!-- affiliation -->
+          <div class="container">
+            <div class="affiliation">
+              <p class="subtitle is-6 publication-authors"> 
+                <a href="https://cv.snu.ac.kr"> <img style="width:30%" src="../imgs/logo_cvlab.png"> </a>
+                <!-- <br>
+                Computer Vision Lab, Seoul National University -->
+              </p>
+            </div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Paper PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Lee_OmniSplat_Taming_Feed-Forward_3D_Gaussian_Splatting_for_Omnidirectional_Images_with_CVPR_2025_paper.pdf"
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <!-- ArXiv PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>ArXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/embed/6rMIQfe7b24?si=cm7cZ-T9r5na7YFD"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Poster Link. -->
+              <!-- <span class="link-block">
+                <a href="https://drive.google.com/file/d/1BGONqS6oIDih7_3401pqO8NSIAlYeX-Q/view?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fa-regular fa-file-powerpoint"></i>
+                  </span>
+                  <span>Poster</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="columns is-centered is-vcentered">
+          <!-- 왼쪽: 비디오 (50%) -->
+          <div class="column is-6 has-text-centered">
+            <figure class="image is-centered">
+              <img src="./imgs/cat_result4k.jpg" alt="method" style="width: 100%;">
+            </figure>
+          </div>
+          <!-- 가운데: 이미지 (50%) -->
+          <div class="column is-6 has-text-centered">
+            <video id="matting-video" autoplay controls muted loop playsinline style="width: 100%;">
+              <source src="./imgs/cat_diffvideo.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-6 has-text-centered">
+            <video id="matting-video" autoplay controls muted loop playsinline style="width: 100%;">
+              <source src="./imgs/cat_diffvideo_tilebytile.mp4" type="video/mp4">
+            </video>
+          </div>
+          <!-- 오른쪽: 이미지 (50%) -->
+          <!-- <div class="column is-4 has-text-centered">
+            <figure class="image is-centered">
+              <img src="./imgs/cat_result4k.jpg" alt="method" style="width: 100%;">
+            </figure>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="column is-centered has-text-centered">
+          <p>
+            <span class="comic-font" style="font-size:20px;"><b>Global Prompt: </b> "A cat with flower background" <br> <b>Local Prompt: </b> "A Cat"</span>
+            <!-- <br>
+            <span class="comic-font" style="font-size:24px;"><b>Local Prompt: </b> "A Cat"</span> -->
+          </p>        
+        </div>
+      </div>
+      <p><br><br>
+        <b>TL;DR.</b> A generative photomosaic framework that synthesizes structure-aligned mosaics and supports few-shot personalization.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present the first generative approach to photomosaic creation. Traditional photomosaic methods rely on a large number of tile images and color-based matching, which limits both diversity and structural consistency. Our generative photomosaic framework synthesizes tile images using diffusion-based generation conditioned on reference images. A low-frequency–conditioned diffusion mechanism aligns global structure while preserving prompt-driven details. This generative formulation enables photomosaic composition that is both semantically expressive and structurally coherent, effectively overcoming the fundamental limitations of matching-based approaches. By leveraging few-shot personalized diffusion, our model is able to produce user-specific or stylistically consistent tiles without requiring an extensive collection of images.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content has-text-justified">
+      <div class="columns is-centered">
+        <figure class="image is-centered">
+          <img src="./imgs/Teaser.png" alt="method">
+        </figure>
+        <br> <br> <br>
+      </div>
+    </div>
+
+    <!-- Qualitative Image and Video -->
+    <div class="column has-text-centered">
+      <h3 class="title is-3">Qualitative Results</h3>
+    </div>
+
+
+    <div class="columns is-centered">
+      <div class="column">
+        <figure class="image is-centered">
+          <img src="./imgs/Mosaic_level5.jpg" alt="indoor compare">
+        </figure>
+      </div>
+    </div>
+    <br><br>
+
+    <div class="columns is-centered">
+      <div class="column">
+        <figure class="image is-centered">
+          <img src="./imgs/qual.jpg" alt="indoor compare">
+        </figure>
+      </div>
+    </div>
+    <!-- <div class="columns is-centered">
+      <div class="column">
+        <video id="matting-video" autoplay controls muted loop playsinline height="100%">
+          <source src="./imgs/qualvideo720.mp4"
+          type="video/mp4">
+        </video>
+      </div>
+    </div> -->
+    <style>
+      .before,
+      .after {
+        margin: 0;
+      }
+      .before figcaption,
+      .after figcaption {
+        background: #fff;
+        border: 1px solid #c0c0c0;
+        border-radius: 4px;
+        color: #2e3452;
+        opacity: 0.8;
+        padding: 4px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 100%;
+      }
+      .before figcaption {
+        left: 4px;
+      }
+      .after figcaption {
+        right: 4px;
+      }
+    </style>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{chung2025from,
+      title={From Matching to Generation: Generative Photomosaics with Structure-Aligned and Personalized Diffusion},
+      author={Jaeyoung Chung, Hyunjin Son, Kyoung Mu Lee},
+      journal={arXiv preprint arXiv:},
+      year={2025}
+}</code></pre>
+  </div>
+</section>
+
+<script>
+  function toggleSliders() {
+      // Get both slider containers
+      var slider1 = document.getElementById("slider1-container_teaser");
+      var slider2 = document.getElementById("slider2-container_teaser");
+
+      // Toggle visibility
+      if (slider1.style.display === "none") {
+          slider1.style.display = "block";
+          slider2.style.display = "none";
+      } else {
+          slider1.style.display = "none";
+          slider2.style.display = "block";
+      }
+  }
+</script>
+
+</body>
+</html>
