@@ -1,0 +1,30 @@
+.wrap {
+  width: 640px;
+  max-width: 90vw;
+  margin: 40px auto;
+  position: relative;
+  cursor: none;
+  overflow: visible;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+/* 원형 돋보기 캔버스 */
+#magCanvas {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  pointer-events: none;
+  display: none;
+  z-index: 10;
+
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  background: transparent;
+}

@@ -182,6 +182,8 @@
     href="./css/image-comparison-slider.css"
   />
 
+  <link rel="stylesheet" href="css/magnifier.css" />
+
 </head>
 <body>
 
@@ -288,6 +290,16 @@
       </div>
 
       <div class="container is-max-desktop">
+      
+        <div class="wrap" id="wrap">    
+            <video id="vid" autoplay muted loop playsinline preload="auto">
+              <source src="./imgs/cat_diffvideo.mp4" type="video/mp4" />
+            </video>
+            <!-- 원형 돋보기 캔버스 -->
+            <canvas id="magCanvas"></canvas>
+          </div>
+        </div>
+
         <div class="columns is-centered is-vcentered">
           <!-- 왼쪽: 비디오 (50%) -->
           <!-- <div class="column is-6 has-text-centered">
@@ -301,6 +313,20 @@
               <source src="./imgs/cat_diffzoomout.mp4" type="video/mp4">
             </video>
           </div>
+          <!-- 가운데: 이미지 (50%) -->
+          <div class="column is-6 has-text-centered">
+            <video id="matting-video" autoplay controls muted loop playsinline style="width: 100%;">
+              <source src="./imgs/cat_diffzoomout2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <!-- 가운데: 이미지 (50%) -->
+          <div class="column is-6 has-text-centered">
+            <video id="matting-video" autoplay controls muted loop playsinline style="width: 100%;">
+              <source src="./imgs/cat_diffzoomout4.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="columns is-centered is-vcentered">
           <!-- 가운데: 이미지 (50%) -->
           <div class="column is-6 has-text-centered">
             <video id="matting-video" autoplay controls muted loop playsinline style="width: 100%;">
@@ -449,6 +475,8 @@
       }
   }
 </script>
+
+<script src="js/magnifier.js"></script>
 
 </body>
 </html>
