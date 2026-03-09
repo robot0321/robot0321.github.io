@@ -54,8 +54,8 @@
               </p>
               <p>I am a Ph.D student in the <a href="https://cv.snu.ac.kr/">Computer Vision Lab</a> at <a href="https://en.snu.ac.kr/">Seoul National University (SNU)</a>, advised by <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>. 
                 My research focuses on 3D vision, particularly 3D reconstruction and generation.
-                I have served as a reviewer/program committee for CVPR, ECCV, ICCV, NeurIPS, AAAI, and TPAMI.
-                I interned at the <a href="https://www.microsoft.com/en-us/research/group/internet-media/">Intelligent Multimedia Group</a> within <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> during the winter of 2021.
+                <!-- I have served as a reviewer/program committee for CVPR, ECCV, ICCV, NeurIPS, AAAI, and TPAMI. -->
+                <!-- I interned at the <a href="https://www.microsoft.com/en-us/research/group/internet-media/">Intelligent Multimedia Group</a> within <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> during the winter of 2021. -->
               </p>
               <p>
                 During my undergraduate studies, I majored in <a href="https://ee.snu.ac.kr/en">Electrical and Computer Engineering</a> at the same university and participated in various projects, such as developing embedded systems on robots and sounding rockets (detailed in the <a href="#teamprojsec">Team Project</a> and <a href="#miniprojsec">Mini Project</a> section).
@@ -91,6 +91,49 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
           <!---->
+          <tr onmouseout="InpaintSLat_stop()" onmouseover="InpaintSLat_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='InpaintSLat_image'><video  width="160" height="160" muted autoplay loop>
+                <source src="imgs/InpaintSLat.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video></div>
+                <img src='imgs/InpaintSLat.png' width="160" height="160">
+              </div>
+              <script type="text/javascript">
+                function InpaintSLat_start() {
+                  document.getElementById('InpaintSLat_image').style.opacity = "1";
+                }
+
+                function InpaintSLat_stop() {
+                  document.getElementById('InpaintSLat_image').style.opacity = "0";
+                }
+                InpaintSLat_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <!-- <a href="ODGS/index.html"> -->
+              <papertitle>InpaintSLat: Inpainting Structured 3D Latents via Noise Optimization</papertitle>
+              <!-- </a> -->
+              <br>
+              <strong>Jaeyoung Chung</strong>,
+              <a href="https://esw0116.github.io/">Suyoung Lee</a>,
+              <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>
+              <!-- <br>
+              <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR),</em> 2025 -->
+              <br>
+              Project page
+              /
+              Paper
+              /
+              ArXiv
+              /
+              Code
+              <p></p>
+              <p>We show that optimizing the initial noisy latent of structured 3D diffusion models enables controllable and training-free 3D inpainting.</p>
+            </td>
+          </tr>
+          <!---->
           <tr onmouseout="Map2World_stop()" onmouseover="Map2World_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
@@ -119,7 +162,7 @@
               <strong>Jaeyoung Chung*</strong>,
               <a href="https://esw0116.github.io/">Suyoung Lee*</a>,
               <a href="https://jeffreyxiang.github.io/">Jianfeng Xiang</a>,
-              <a href="https://jlyang.org/">Jiaolong Yang</a>,
+              <a href="https://jlyang.org/">Jialong Yang</a>,
               <a href="https://cv.snu.ac.kr/index.php/~kmlee/">Kyoung Mu Lee</a>
               <!-- <br>
               <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR),</em> 2025 -->
