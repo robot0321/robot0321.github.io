@@ -183,7 +183,7 @@
 </section>
 
 
-<section class="hero is-light is-small wide-section">
+<section class="hero is-light is-small wide-section" id="preview-carousel-section">
   <div class="hero-body">
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
@@ -322,6 +322,84 @@
     </div>
   </div>
 </section>
+
+<div class="modal" id="preview-video-modal">
+  <div class="modal-background"></div>
+  <div class="modal-content preview-video-modal-content">
+    <video id="preview-video-modal-player" controls autoplay muted loop playsinline>
+      <source id="preview-video-modal-source" src="" type="video/mp4">
+    </video>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const previewSection = document.getElementById('preview-carousel-section');
+    const modal = document.getElementById('preview-video-modal');
+    const modalPlayer = document.getElementById('preview-video-modal-player');
+    const modalSource = document.getElementById('preview-video-modal-source');
+
+    if (!previewSection || !modal || !modalPlayer || !modalSource) {
+      return;
+    }
+
+    const previewVideos = previewSection.querySelectorAll('video');
+
+    function openModal(fullResSrc) {
+      modalSource.src = fullResSrc;
+      modalPlayer.load();
+      modal.classList.add('is-active');
+      const playPromise = modalPlayer.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    }
+
+    function closeModal() {
+      modalPlayer.pause();
+      modal.classList.remove('is-active');
+      modalSource.src = '';
+      modalPlayer.load();
+    }
+
+    previewVideos.forEach((video) => {
+      const source = video.querySelector('source');
+      if (!source) {
+        return;
+      }
+
+      const originalSrc = source.getAttribute('src');
+      const previewSrc = originalSrc.replace('/static/videos/', '/static/videos_preview/');
+
+      video.dataset.fullresSrc = originalSrc;
+      video.classList.add('preview-video');
+      video.removeAttribute('controls');
+      video.setAttribute('preload', 'metadata');
+      source.setAttribute('src', previewSrc);
+      video.load();
+
+      video.addEventListener('error', () => {
+        if (source.getAttribute('src') !== originalSrc) {
+          source.setAttribute('src', originalSrc);
+          video.load();
+        }
+      }, { once: true });
+
+      video.addEventListener('click', () => {
+        openModal(video.dataset.fullresSrc);
+      });
+    });
+
+    modal.querySelector('.modal-background').addEventListener('click', closeModal);
+    modal.querySelector('.modal-close').addEventListener('click', closeModal);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('is-active')) {
+        closeModal();
+      }
+    });
+  });
+</script>
 
 <section class="section wide-section">
   <div class="container is-max-desktop">
@@ -463,7 +541,7 @@
         <br>
 
         <!-- Detail Enhancement -->
-        <h3 class="title is-4">Detail Enhancement</h3>
+        <!-- <h3 class="title is-4">Detail Enhancement</h3>
         <div class="content has-text-justified">
           <p>
             <b>Map2World</b> trains detail-enhancing networks that enhance the quality of the generated world.
@@ -661,7 +739,7 @@
               startRendering();
             });
           });
-        </script>
+        </script> -->
         <!--/ Detail Enhancement -->
 
 

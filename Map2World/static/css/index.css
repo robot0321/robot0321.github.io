@@ -127,6 +127,22 @@ body {
   margin: 0;
 }
 
+#preview-carousel-section .results-carousel video.preview-video {
+  cursor: pointer;
+}
+
+.preview-video-modal-content {
+  width: min(90vw, 1280px);
+}
+
+.preview-video-modal-content video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  margin: 0 auto;
+}
+
 .wide-section > .container.is-max-desktop,
 .wide-section > .hero-body > .container.is-max-desktop,
 .wide-section > .hero-body > .container {
