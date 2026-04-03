@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InpaintSLat: Inpainting Structured 3D Latents via Noise Optimization</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPKZS1H0X8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-VPKZS1H0X8');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://robot0321.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://robot0321.github.io/Map2World/index.html">
+            Map2World
+          </a>
+          <a class="navbar-item" href="https://robot0321.github.io/InpaintSLat/index.html">
+            InpaintSLat
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero wide-section">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">InpaintSLat: Inpainting Structured 3D Latents via Noise Optimization</h1>
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">
+              <a href="https://robot0321.github.io">Jaeyoung Chung</a><sup></sup>, </span>
+            <span class="author-block">
+              <a href="">Dohee Cho</a><sup></sup>, </span>
+            <span class="author-block">
+              <a href="https://esw0116.github.io">Suyoung Lee</a><sup></sup>, </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Kyoung Mu Lee</a><sup></sup>
+            </span>
+          </div>
+          <br>
+          
+          <!-- affiliation -->
+          <div class="container">
+            <div class="affiliation">
+              <p class="subtitle is-6 publication-authors"> 
+                <a href="https://cv.snu.ac.kr"> <img style="width:30%" src="../imgs/logo_cvlab.png"> </a>
+                <!-- <br>
+                Computer Vision Lab, Seoul National University -->
+              </p>
+            </div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser wide-section">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4" type="video/mp4">
+      </video> -->
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-four-fifths">
+          <div class="content">
+            <figure class="image is-centered">
+              <img src="./static/images/fig_teaser.png" alt="teaser" style="width: 100%;">
+            </figure>
+          </div>
+        </div>
+        <div class="column is-one-fifth">
+            <div class="content">
+              <video id="matting-video" autoplay muted loop playsinline style="width: 100%; height: auto;">
+                <source src="./static/videos/teaser_redhouse.mp4" type="video/mp4">
+              </video>
+            </div>
+        </div>
+      </div>
+
+      <h2 class="subtitle has-text-centered">
+        <b>TL;DR</b> - <b>InpaintSLat</b> performs training-free 3D inpainting by jointly preserving structure 
+        <br>
+        and generating plausible content via initial noise optimization.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small wide-section" id="preview-carousel-section">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_011fd42.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-5f18-sd1">
+          <video poster="" id="h2-5f18-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_01831e7.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-5f18-sd1">
+          <video poster="" id="h2-5f18-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_019c7bb.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-1991-sd1">
+          <video poster="" id="h2-1991-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_0219f2a.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-5907-sd1">
+          <video poster="" id="h2-5907-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_025468e.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-8011-sd1">
+          <video poster="" id="h2-8011-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_02a09b7.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-8011-sd2">
+          <video poster="" id="h2-8011-sd2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_02d841c.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-c5b0-sd1">
+          <video poster="" id="h2-c5b0-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_03d192e.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h2-e285-sd0">
+          <video poster="" id="h2-e285-sd0" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples/indep_045ddbd.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-h3-4a25-sd2">
+          <video poster="" id="h3-4a25-sd2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_00482f9.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-5f18-sd0">
+          <video poster="" id="h3-5f18-sd0" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_004d20a.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-5f18-sd1">
+          <video poster="" id="h3-5f18-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_005ed1d.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-1991-sd1">
+          <video poster="" id="h3-1991-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_00926a4.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-5907-sd0">
+          <video poster="" id="h3-5907-sd0" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_009972b.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-5907-sd2">
+          <video poster="" id="h3-5907-sd2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_0118ff7.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-8011-sd0">
+          <video poster="" id="h3-8011-sd0" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_0138558.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-8011-sd1">
+          <video poster="" id="h3-8011-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_0233361.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-c5b0-sd1">
+          <video poster="" id="h3-c5b0-sd1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_0283c01.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-e285-sd0">
+          <video poster="" id="h3-e285-sd0" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_03514e2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-h3-e285-sd2">
+          <video poster="" id="h3-e285-sd2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video_samples_top/indep_0382f6f.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const previewSection = document.getElementById('preview-carousel-section');
+
+    if (!previewSection) {
+      return;
+    }
+
+    const previewVideos = previewSection.querySelectorAll('video');
+
+    function ensurePreviewPlayback(video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.autoplay = true;
+      video.loop = true;
+
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    }
+
+    previewVideos.forEach((video) => {
+      const source = video.querySelector('source');
+      if (!source) {
+        return;
+      }
+
+      const originalSrc = source.getAttribute('src');
+      const previewSrc = originalSrc.replace('/static/videos/', '/static/videos_preview/');
+
+      video.dataset.fullresSrc = originalSrc;
+      video.classList.add('preview-video');
+      video.removeAttribute('controls');
+      video.setAttribute('preload', 'auto');
+      source.setAttribute('src', previewSrc);
+      video.load();
+      ensurePreviewPlayback(video);
+
+      video.addEventListener('loadeddata', () => {
+        ensurePreviewPlayback(video);
+      });
+
+      video.addEventListener('canplay', () => {
+        ensurePreviewPlayback(video);
+      });
+
+      video.addEventListener('error', () => {
+        if (source.getAttribute('src') !== originalSrc) {
+          source.setAttribute('src', originalSrc);
+          video.load();
+          ensurePreviewPlayback(video);
+        }
+      }, { once: true });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        previewVideos.forEach((video) => {
+          ensurePreviewPlayback(video);
+        });
+      }
+    });
+  });
+</script>
+
+<section class="section wide-section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present a training-free approach for controllable 3D inpainting based on initialization 
+            optimization in structured 3D latent diffusion models. While recent advances such as TRELLIS 
+            enable high-quality 3D generation, we observe that geometric structure is largely determined 
+            in the early stages of diffusion and is highly sensitive to the initial noise seed. In 
+            inpainting scenarios, this sensitivity leads to unstable geometry and inconsistent prompt 
+            alignment when relying solely on sampling trajectory manipulation. We instead refine the 
+            initial structured latent by imposing reconstruction constraints only on preserved regions, 
+            allowing masked regions to be synthesized by the pretrained generative prior. To enable 
+            stable and efficient optimization, we adopt memory-efficient approximate backpropagation 
+            based on a rectified flow formulation, structured basis parameterization for geometric 
+            components, and Gaussian regularization on the optimized seed. Furthermore, we exploit the 
+            early commitment of coarse geometry to perform reduced-step optimization, significantly 
+            lowering computational cost. Experiments on TRELLIS demonstrate consistent improvements in 
+            contextual consistency and prompt alignment over representative training-free diffusion control 
+            baselines, establishing initialization control as an effective alternative to trajectory-based 
+            manipulation for 3D inpainting.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section wide-section">
+  <div class="container is-max-desktop ">
+
+    <!-- <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <video id="dollyzoom" autoplay muted loop playsinline height="100%">
+            <source src="./static/video_scg/spring_grid_9_10_prompt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column">
+          <div class="column content">
+            <video id="matting-video" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/video_scg/spring_grid_9_10_prompt.mp4" type="video/mp4">
+            </video>
+          </div>
+      </div>
+    </div> -->
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <h2 class="title is-3">Feature Overview</h2>
+          <br>
+        </div>
+        
+
+        <!-- Interpolating. -->
+        <!-- <h3 class="title is-4">Interpolating states</h3>
+        <div class="content has-text-justified">
+          <p>
+            We can also animate the scene by interpolating the deformation latent codes of two input
+            frames. Use the slider here to linearly interpolate between the left frame and the right
+            frame.
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_start.jpg"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+            <p>Start Frame</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="interpolation-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="interpolation-slider"
+                   step="1" min="0" max="100" value="0" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_end.jpg"
+                 class="interpolation-image"
+                 alt="Interpolation end reference image."/>
+            <p class="is-bold">End Frame</p>
+          </div>
+        </div>
+        <br/> -->
+        <!--/ Interpolating. -->
+
+        <!-- Segment-conditioned Generation -->
+        <h3 class="title is-4">3D Completion</h3>
+        <div class="content has-text-justified">
+          <p>
+            We remove a masked region from the captioned 3D dataset (e.g. Toys4k) samples, and generate the missing parts using the original caption.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video" autoplay loop muted playsinline height="100%">
+            <source src="./static/videos/toys4k_grid_gs_bigcap.mp4" type="video/mp4">
+          </video>
+        </div>
+        <br><br>
+
+        <!-- Scale Control -->
+        <h3 class="title is-4">3D Editing</h3>
+        <div class="content has-text-justified">
+          <p>
+            We remove a masked region from generated 3D samples (e.g. "Trees on the grass"), and generate the missing parts using inpainting prompts (e.g. "A red roof house").\
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video" autoplay loop muted playsinline height="100%">
+            <source src="./static/videos/video_Aredroofhouse_rotate.mp4" type="video/mp4">
+          </video>
+          <!-- <video id="replay-video" autoplay loop muted playsinline height="100%">
+            <source src="./static/videos/city_topcrop.mp4" type="video/mp4">
+          </video> -->
+        </div>
+        <!--/ Scale Control -->
+        <br>
+
+        <!-- Detail Enhancement -->
+        <!-- <h3 class="title is-4">Detail Enhancement</h3>
+        <div class="content has-text-justified">
+          <p>
+            <b>Map2World</b> trains detail-enhancing networks that enhance the quality of the generated world.
+          </p>
+        </div>
+        <div class="container detail-enhancement-slider">
+          <div class="detail-enhancement-grid">
+            <div class="detail-enhancement-compare">
+              <video
+                class="detail-enhancement-source"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              >
+                <source src="./static/videos/contem150_compare_half.mp4" type="video/mp4">
+              </video>
+              <canvas
+                class="detail-enhancement-canvas"
+                width="1024"
+                height="1024"
+              ></canvas>
+              <div class="detail-enhancement-divider" aria-hidden="true">
+                <div class="detail-enhancement-handle"></div>
+              </div>
+            </div>
+            <div class="detail-enhancement-compare">
+              <video
+                class="detail-enhancement-source"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              >
+                <source src="./static/videos/contem150_compare_half.mp4" type="video/mp4">
+              </video>
+              <canvas
+                class="detail-enhancement-canvas"
+                width="1024"
+                height="1024"
+              ></canvas>
+              <div class="detail-enhancement-divider" aria-hidden="true">
+                <div class="detail-enhancement-handle"></div>
+              </div>
+            </div>
+            <div class="detail-enhancement-compare">
+              <video
+                class="detail-enhancement-source"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              >
+                <source src="./static/videos/contem150_compare_half.mp4" type="video/mp4">
+              </video>
+              <canvas
+                class="detail-enhancement-canvas"
+                width="1024"
+                height="1024"
+              ></canvas>
+              <div class="detail-enhancement-divider" aria-hidden="true">
+                <div class="detail-enhancement-handle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          $(function() {
+            document.querySelectorAll('.detail-enhancement-compare').forEach((compare) => {
+              const video = compare.querySelector('.detail-enhancement-source');
+              const canvas = compare.querySelector('.detail-enhancement-canvas');
+              const divider = compare.querySelector('.detail-enhancement-divider');
+
+              if (!video || !canvas || !divider) {
+                return;
+              }
+
+              const context = canvas.getContext('2d');
+              const frameWidth = canvas.width;
+              const frameHeight = canvas.height;
+              let dividerPct = 0.7;
+              let rafId = null;
+              let isActive = true;
+
+              video.muted = true;
+              video.defaultMuted = true;
+              video.playsInline = true;
+
+              function setDivider(pct) {
+                dividerPct = Math.min(1, Math.max(0, pct));
+                divider.style.left = `${dividerPct * 100}%`;
+              }
+
+              function drawFrame() {
+                if (video.readyState < 2) {
+                  if (isActive) {
+                    rafId = window.requestAnimationFrame(drawFrame);
+                  } else {
+                    rafId = null;
+                  }
+                  return;
+                }
+
+                const splitX = Math.round(frameWidth * dividerPct);
+                const sourceHalfWidth = video.videoWidth / 2;
+                const sourceHeight = video.videoHeight;
+                const leftSourceWidth = sourceHalfWidth * dividerPct;
+                const rightSourceX = sourceHalfWidth + leftSourceWidth;
+                const rightSourceWidth = sourceHalfWidth - leftSourceWidth;
+                context.clearRect(0, 0, frameWidth, frameHeight);
+
+                if (splitX > 0) {
+                  context.drawImage(
+                    video,
+                    0, 0, leftSourceWidth, sourceHeight,
+                    0, 0, splitX, frameHeight
+                  );
+                }
+
+                if (splitX < frameWidth) {
+                  context.drawImage(
+                    video,
+                    rightSourceX, 0, rightSourceWidth, sourceHeight,
+                    splitX, 0, frameWidth - splitX, frameHeight
+                  );
+                }
+
+                if (isActive) {
+                  rafId = window.requestAnimationFrame(drawFrame);
+                } else {
+                  rafId = null;
+                }
+              }
+
+              function updateFromPointer(clientX) {
+                const bounds = compare.getBoundingClientRect();
+                setDivider((clientX - bounds.left) / bounds.width);
+              }
+
+              function startRendering() {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                  playPromise.catch(() => {});
+                }
+                if (!rafId) {
+                  rafId = window.requestAnimationFrame(drawFrame);
+                }
+              }
+
+              compare.addEventListener('mouseenter', (event) => {
+                updateFromPointer(event.clientX);
+              });
+
+              compare.addEventListener('mousemove', (event) => {
+                updateFromPointer(event.clientX);
+              });
+
+              compare.addEventListener('touchstart', (event) => {
+                if (event.touches.length > 0) {
+                  updateFromPointer(event.touches[0].clientX);
+                }
+              }, { passive: true });
+
+              compare.addEventListener('touchmove', (event) => {
+                if (event.touches.length > 0) {
+                  updateFromPointer(event.touches[0].clientX);
+                }
+              }, { passive: true });
+
+              video.addEventListener('loadeddata', () => {
+                setDivider(dividerPct);
+                drawFrame();
+              });
+
+              video.addEventListener('play', () => {
+                if (isActive && !rafId) {
+                  rafId = window.requestAnimationFrame(drawFrame);
+                }
+              });
+
+              video.addEventListener('pause', () => {
+                if (rafId) {
+                  window.cancelAnimationFrame(rafId);
+                  rafId = null;
+                }
+                drawFrame();
+              });
+
+              setDivider(dividerPct);
+              video.load();
+              startRendering();
+            });
+          });
+        </script> -->
+        <!--/ Detail Enhancement -->
+
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+
+    <!-- Concurrent Work. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+          <p>
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
+          </p>
+          <p>
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section wide-section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div class="columns is-centered">
+      <h2 class="title">BibTeX</h2>
+    </div>
+    <pre><code>@article{chung2026map,
+  author    = {Jaeyoung Chung, Dohee Cho, Suyoung Lee, and Kyoung Mu Lee},
+  title     = {InpaintSLat: Inpainting Structured 3D Latents via Noise Optimization},
+  journal   = {arXiv},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
