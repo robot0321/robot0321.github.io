@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spark Gaussian Viewer</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #111; color: #eee; font: 13px system-ui, sans-serif; }
+    #hud { position: fixed; left: 12px; top: 12px; width: min(420px, calc(100vw - 24px)); padding: 10px; background: rgba(0,0,0,.62); border: 1px solid rgba(255,255,255,.15); border-radius: 6px; }
+    #status { color: #bbb; overflow-wrap: anywhere; }
+    .row { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 8px; margin-top: 8px; }
+    select { min-width: 0; color: #eee; background: #222; border: 1px solid #555; border-radius: 4px; padding: 4px 6px; }
+  </style>
+</head>
+<body>
+  <div id="hud">
+    <div>Spark Gaussian Viewer</div>
+    <div class="row"><label for="runSelect">Run</label><select id="runSelect"></select></div>
+    <div class="row"><label for="fileSelect">File</label><select id="fileSelect"></select></div>
+    <div id="status">Loading...</div>
+  </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/node_modules/three/build/three.module.js",
+        "three/addons/": "/node_modules/three/examples/jsm/",
+        "@sparkjsdev/spark": "/node_modules/@sparkjsdev/spark/dist/spark.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+    import { WorldNavigation } from "/Map2World/static/js/spark-navigation.js";
+    import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
+
+    const status = document.getElementById("status");
+    const runSelect = document.getElementById("runSelect");
+    const fileSelect = document.getElementById("fileSelect");
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x111111);
+
+    const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.01, 1000);
+    camera.up.set(0, 0, 1);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    const navigation = new WorldNavigation(camera, renderer.domElement);
+    const controls = navigation.controls;
+    controls.target.set(0, 0, 0);
+    controls.enableDamping = true;
+    let userMovedCamera = false;
+    controls.addEventListener("start", () => { userMovedCamera = true; });
+    const pressedKeys = new Set();
+    const clock = new THREE.Clock();
+
+    function setInitialView() {
+      pressedKeys.clear();
+      navigation.reset();
+      const params = new URLSearchParams(location.search);
+      if (!["radius", "azimuth", "polar"].some(key => params.has(key))) return;
+      const number = (key, fallback) => {
+        const value = params.has(key) ? Number(params.get(key)) : NaN;
+        return Number.isFinite(value) ? value : fallback;
+      };
+      const radius = THREE.MathUtils.clamp(number("radius", camera.position.distanceTo(controls.target)), controls.minDistance, controls.maxDistance);
+      const azimuth = THREE.MathUtils.degToRad(number("azimuth", 135));
+      const polar = THREE.MathUtils.degToRad(THREE.MathUtils.clamp(number("polar", 60), 3, 177));
+      camera.position.copy(controls.target).add(new THREE.Vector3(Math.cos(azimuth) * Math.sin(polar), Math.sin(azimuth) * Math.sin(polar), Math.cos(polar)).multiplyScalar(radius));
+      controls.update();
+    }
+
+    setInitialView();
+
+    const spark = new SparkRenderer({ renderer });
+    scene.add(spark);
+
+    let splat = null;
+    let runs = [];
+
+    function formatBytes(bytes) {
+      const units = ["B", "KB", "MB", "GB"];
+      let value = bytes;
+      let unit = 0;
+      while (value >= 1024 && unit < units.length - 1) {
+        value /= 1024;
+        unit += 1;
+      }
+      return `${value.toFixed(unit === 0 ? 0 : 1)} ${units[unit]}`;
+    }
+
+    function selectedRun() {
+      return runs.find((run) => run.name === runSelect.value);
+    }
+
+    function populateFiles(fileName) {
+      const run = selectedRun();
+      fileSelect.innerHTML = "";
+      if (!run) return;
+      for (const file of run.files) {
+        const option = document.createElement("option");
+        option.value = file.name;
+        option.textContent = `${file.name} (${formatBytes(file.size_bytes)})`;
+        fileSelect.appendChild(option);
+      }
+      if (fileName && run.files.some((file) => file.name === fileName)) {
+        fileSelect.value = fileName;
+      }
+    }
+
+    function loadSelected(updateUrl = true) {
+      const run = selectedRun();
+      const file = run?.files.find((item) => item.name === fileSelect.value);
+      if (!run || !file) {
+        status.textContent = "No splat files found under logs/.";
+        return;
+      }
+
+      if (splat) {
+        scene.remove(splat);
+        splat.dispose?.();
+        splat = null;
+      }
+
+      pressedKeys.clear();
+      userMovedCamera = false;
+      status.textContent = `Loading ${file.url}`;
+      splat = new SplatMesh({
+        url: file.url,
+        onLoad: (mesh) => {
+          if (mesh !== splat) return;
+          navigation.setBounds(mesh.getBoundingBox());
+          status.textContent = `Loaded ${file.url}`;
+          if (!userMovedCamera) {
+            setInitialView();
+          }
+        },
+      });
+      scene.add(splat);
+
+      if (updateUrl) {
+        const next = new URL(location.href);
+        next.searchParams.set("run", run.name);
+        next.searchParams.set("file", file.name);
+        history.replaceState(null, "", next);
+      }
+    }
+
+    async function initializePicker() {
+      const params = new URLSearchParams(location.search);
+      const requestedRun = params.get("run");
+      const requestedFile = params.get("file");
+      const response = await fetch("/api/runs");
+      const payload = await response.json();
+      runs = payload.runs || [];
+
+      runSelect.innerHTML = "";
+      for (const run of runs) {
+        const option = document.createElement("option");
+        option.value = run.name;
+        option.textContent = run.name;
+        runSelect.appendChild(option);
+      }
+
+      if (requestedRun && runs.some((run) => run.name === requestedRun)) {
+        runSelect.value = requestedRun;
+      }
+      populateFiles(requestedFile);
+      loadSelected(false);
+    }
+
+    runSelect.addEventListener("change", () => {
+      populateFiles();
+      loadSelected();
+      runSelect.blur();
+    });
+    fileSelect.addEventListener("change", () => {
+      loadSelected();
+      fileSelect.blur();
+    });
+    initializePicker().catch((error) => {
+      console.error(error);
+      status.textContent = `Failed to load run list: ${error.message}`;
+    });
+
+    function isTypingTarget(target) {
+      return target instanceof HTMLInputElement
+        || target instanceof HTMLTextAreaElement
+        || target?.isContentEditable;
+    }
+
+    addEventListener("keydown", (event) => {
+      if (isTypingTarget(event.target)) return;
+      const key = event.key.toLowerCase();
+      const handledKeys = ["w", "a", "s", "d", "q", "e", "i", "j", "k", "l", "shift", "alt"];
+      if (key === "r") {
+        pressedKeys.clear();
+        userMovedCamera = false;
+        setInitialView();
+        event.preventDefault();
+        return;
+      }
+      if (!handledKeys.includes(key)) return;
+      pressedKeys.add(key);
+      userMovedCamera = true;
+      event.preventDefault();
+    });
+
+    addEventListener("keyup", (event) => {
+      pressedKeys.delete(event.key.toLowerCase());
+    });
+
+    addEventListener("blur", () => {
+      pressedKeys.clear();
+    });
+
+    addEventListener("resize", () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+
+    renderer.setAnimationLoop(() => {
+      const deltaSeconds = Math.min(clock.getDelta(), 0.05);
+      navigation.update(deltaSeconds, pressedKeys);
+      renderer.render(scene, camera);
+    });
+  </script>
+</body>
+</html>

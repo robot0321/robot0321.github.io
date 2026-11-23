@@ -137,3 +137,9 @@ figure {
   position: relative;
   text-align: center;
 }
+
+.news-scroll {
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 8px;
+}

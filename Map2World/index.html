@@ -33,6 +33,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/spark-viewer.css">
   <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -405,6 +406,52 @@
       if (event.key === 'Escape' && modal.classList.contains('is-active')) {
         closeModal();
       }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videos = Array.from(document.querySelectorAll('video'));
+
+    function playVideo(video) {
+      if (document.hidden || video.dataset.inViewport !== 'true') {
+        return;
+      }
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    }
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.15;
+        video.dataset.inViewport = String(isVisible);
+        if (isVisible) {
+          playVideo(video);
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: [0, 0.15, 0.5] });
+
+    videos.forEach((video) => {
+      video.removeAttribute('autoplay');
+      video.setAttribute('preload', 'metadata');
+      video.pause();
+      videoObserver.observe(video);
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      videos.forEach((video) => {
+        if (document.hidden) {
+          video.pause();
+        } else {
+          playVideo(video);
+        }
+      });
     });
   });
 </script>
@@ -786,6 +833,78 @@
   </div>
 </section>
 
+<section class="section wide-section" id="interactive-worlds">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Explore Our Generated Worlds</h2>
+        <p class="spark-viewer-intro">
+          Explore the generated 3D Gaussian scenes directly in your browser. (25% Pruned for faster loading)
+        </p>
+
+        <div class="spark-viewer" id="spark-viewer" tabindex="0" aria-label="Interactive 3D Gaussian scene viewer">
+          <div class="spark-viewer-tabs" id="spark-viewer-tabs" role="tablist" aria-label="Generated scenes">
+            <!-- Manage viewer tab names and SPZ files here. Tabs sharing a URL also share one in-memory cache. -->
+            <button class="spark-viewer-tab" type="button" role="tab" data-scene-id="fourseason"
+                    data-scene-label="Four Seasons" data-scene-url="./static/spz/under50mb/fourseason.spz" data-scene-size="49347670">
+              Four Seasons <span class="spark-viewer-tab-state" aria-hidden="true"></span>
+            </button>
+            <button class="spark-viewer-tab" type="button" role="tab" data-scene-id="cityforest"
+                    data-scene-label="City Forest" data-scene-url="./static/spz/under50mb/cityforest.spz" data-scene-size="49340566">
+              City Forest <span class="spark-viewer-tab-state" aria-hidden="true"></span>
+            </button>
+            <button class="spark-viewer-tab" type="button" role="tab" data-scene-id="castle"
+                    data-scene-label="Castle Town" data-scene-url="./static/spz/under50mb/castle.spz" data-scene-size="49333011">
+              Castle Town <span class="spark-viewer-tab-state" aria-hidden="true"></span>
+            </button>
+            <button class="spark-viewer-tab" type="button" role="tab" data-scene-id="coastal"
+                    data-scene-label="Coastal Beach" data-scene-url="./static/spz/under50mb/coastal.spz" data-scene-size="49333737">
+              Coastal Beach <span class="spark-viewer-tab-state" aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="spark-viewer-stage" id="spark-viewer-stage">
+            <div class="spark-viewer-placeholder" id="spark-viewer-placeholder">
+              <span class="spark-viewer-placeholder-icon" aria-hidden="true">360&deg;</span>
+              <span>Scroll here to load the interactive world</span>
+            </div>
+            <div class="spark-viewer-progress" id="spark-viewer-progress" hidden>
+              <div class="spark-viewer-progress-track" role="progressbar" aria-label="Scene loading progress"
+                   aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="spark-viewer-progress-fill"></div>
+              </div>
+              <span class="spark-viewer-progress-label">Preparing viewer...</span>
+            </div>
+            <div class="spark-viewer-status" id="spark-viewer-status" aria-live="polite"></div>
+            <button class="spark-viewer-reset" id="spark-viewer-reset" type="button" title="Reset view (R)">
+              <span aria-hidden="true">&#8634;</span> Reset view
+            </button>
+          </div>
+        </div>
+
+        <div class="spark-viewer-help" aria-label="Viewer controls">
+          <span><b>Rotate</b> Left drag</span>
+          <span><b>Pan</b> Right drag</span>
+          <span><b>Zoom</b> Scroll / pinch</span>
+          <span><b>Move</b> W A S D / Q E</span>
+          <span><b>Speed</b> Shift faster / Alt slower</span>
+          <span><b>Look</b> I J K L</span>
+          <span><b>Reset</b> R</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/",
+      "@sparkjsdev/spark": "https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.1.0/dist/spark.module.js"
+    }
+  }
+</script>
+<script type="module" src="./static/js/spark-viewer.js"></script>
 
 <section class="section wide-section" id="BibTeX">
   <div class="container is-max-desktop content">
